@@ -7,31 +7,18 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Groups', {
+    await queryInterface.createTable('Venues', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      organizerId: {
+      groupId: {
         type: Sequelize.INTEGER
       },
-      name: {
+      address: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unqiue: true
-      },
-      about: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      type: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      private: {
-        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       city: {
@@ -40,6 +27,14 @@ module.exports = {
       },
       state: {
         type: Sequelize.STRING(2),
+        allowNull: false
+      },
+      lat: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      lng: {
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       createdAt: {
@@ -51,16 +46,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-      },
-      numMembers: {
-        type: Sequelize.INTEGER
-      },
-      previewImage: {
-        type: Sequelize.STRING
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Groups');
+    await queryInterface.dropTable('Venues');
   }
 };
