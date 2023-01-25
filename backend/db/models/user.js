@@ -40,7 +40,9 @@ module.exports = (sequelize, DataTypes) => {
       return await User.scope('currentUser').findByPk(user.id);
     }
     static associate(models) {
-      // define association here
+      User.hasOne(models.Group, { foreignKey: 'organizerId' });
+      User.belongsToMany(models.Group, { through: models.Membership });
+      User.belongsToMAny(models.Event, { through: models.Attendee });
     }
   }
   User.init({

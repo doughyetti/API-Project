@@ -24,6 +24,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM,
+        values: ['co-host', 'member', 'pending'],
         allowNull: false
       },
       createdAt: {
