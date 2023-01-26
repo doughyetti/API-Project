@@ -16,8 +16,8 @@ module.exports = {
         type: 'Online',
         capacity: 10,
         price: 18.50,
-        // startDate: '2021-11-19 20:00:00',
-        // endDate: '2021-11-19 22:00:00',
+        startDate: new Date('2021-11-19 20:00:00'),
+        endDate: new Date('2021-11-19 22:00:00'),
         numAttending: 8,
         previewImage: 'image url'
       }

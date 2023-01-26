@@ -45,14 +45,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false
     },
-    // startDate: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false
-    // },
-    // endDate: {
-    //   type: DataTypes.DATE,
-    //   allowNull: false
-    // },
+    startDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    endDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     numAttending: {
       type: DataTypes.INTEGER,
       allowNull: false

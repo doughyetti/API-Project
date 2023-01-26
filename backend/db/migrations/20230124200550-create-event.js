@@ -42,14 +42,14 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false
       },
-      // startDate: {
-      //   type: Sequelize.DATE,
-      //   allowNull: false
-      // },
-      // endDate: {
-      //   type: Sequelize.DATE,
-      //   allowNull: false
-      // },
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
       numAttending: {
         type: Sequelize.INTEGER,
         allowNull: false
