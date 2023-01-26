@@ -1,5 +1,6 @@
 'use strict';
 
+let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -7,7 +8,8 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Events', [
+    options.tableName = 'Events';
+    await queryInterface.bulkInsert(options, [
       {
         groupId: 1,
         venueId: 1,
@@ -21,12 +23,13 @@ module.exports = {
         numAttending: 8,
         previewImage: 'image url'
       }
-    ]);
+    ], {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Events', {
+    options.tableName = 'Events';
+    await queryInterface.bulkDelete(options, {
       name: 'Tennis Group First Meet and Greet'
-    });
+    }, {});
   }
 };
