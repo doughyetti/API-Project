@@ -46,6 +46,11 @@ router.post(
     const user = await User.signup({ email, username, password, firstName, lastName });
 
     await setTokenCookie(res, user);
+    
+    if (user.email) {
+      const err = new Error('User with that email already exists');
+      err.status = 403
+    }
 
     return res.json({
       user
