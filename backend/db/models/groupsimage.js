@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      groupsImage.belongsTo(models.Group, { foreignKey: 'groupId' });
+      groupsImage.belongsTo(models.Group, { foreignKey: 'groupId', as: 'GroupImages' });
     }
   }
   groupsImage.init({
@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING
+    },
+    preview: {
+      type: DataTypes.BOOLEAN,
     }
   }, {
     sequelize,

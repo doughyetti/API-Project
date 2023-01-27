@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Group, User, Venue } = require('../../db/models');
+const { Group, User, Venue, groupsImage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -28,8 +28,10 @@ router.post('/', requireAuth, async (req, res) => {
 
 //GET all groups by Current User
 router.get('/current', requireAuth, async (req, res) => {
-  const userId = User.getCurrentUserById(req.user.id)
-  const Groups = await Group.findAll({ where: { userId } });
+  const { user } = req;
+  const Groups = await Group.findAll({
+    where: { organizerId: user.id }
+  });
 
   return res.json({ Groups });
 });
@@ -38,8 +40,16 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get('/:groupId', async (req, res) => {
   const groupId = req.params.groupId;
   const group = await Group.findOne({
-    where: {id: groupId},
+    where: { id: groupId },
+    attributes: {
+      exclude: ['previewImage']
+    },
     include: [
+      {
+        model: groupsImage,
+        attributes: ['id', 'url', 'preview'],
+        as: 'GroupImages'
+      },
       {
         model: User,
         attributes: ['id', 'firstName', 'lastName'],
