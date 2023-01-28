@@ -90,12 +90,13 @@ router.put('/:groupId', requireAuth, async (req, res) => {
       group.private = private;
       group.city = city;
       group.state = state;
+
       await group.save();
 
       return res.json(group);
     } else {
       return res.status(403).json({
-        message: "User not authorized to add image",
+        message: "User not authorized to update group",
         statusCode: 403
       });
     }
@@ -125,6 +126,74 @@ router.post('/:groupId/images', requireAuth, async (req, res) => {
         id: newImage.id,
         url: newImage.url,
         preview: newImage.preview
+      });
+    } else {
+      return res.status(403).json({
+        message: "User not authorized to add image",
+        statusCode: 403
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//GET venue based on group ID
+router.get('/:groupId/venues', requireAuth, async (req, res) => {
+  const { user } = req;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    const organizerId = group.organizerId;
+    if (user.id === organizerId) {
+      const venue = await Venue.findByPk(groupId, {
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        }
+      });
+
+      res.json({ Venues: [venue] });
+
+    } else {
+      return res.status(403).json({
+        message: "User not authorized to add image",
+        statusCode: 403
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//POST new venue based on group ID
+router.post('/:groupId/venues', requireAuth, async (req, res) => {
+  const { user } = req;
+  const { address, city, state, lat, lng } = req.body;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    const organizerId = group.organizerId;
+    if (user.id === organizerId) {
+      const newVenue = await Venue.create({
+        groupId: groupId, address, city, state, lat, lng
+      });
+
+      return res.json({
+        id: newVenue.id,
+        groupId: groupId,
+        address: newVenue.address,
+        city: newVenue.city,
+        state: newVenue.state,
+        lat: newVenue.lat,
+        lng: newVenue.lng
       });
     } else {
       return res.status(403).json({
