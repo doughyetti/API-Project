@@ -74,4 +74,26 @@ router.get('/:groupId', async (req, res) => {
   res.json(group);
 });
 
+//POST image to group based on group id
+router.post('/:groupId/images', requireAuth, async (req, res) => {
+  const groupId = req.params.groupId;
+  const { user } = req;
+  const ownerId = User.findOne({ where: {id: user.id} });
+  const { url, preview } = req.body;
+
+  console.log(ownerId)
+  if (user.id === ownerId) {
+    const newImage = await groupsImage.create({
+      url, preview
+    });
+    return res.json(newImage);
+  } else {
+    const errObj = {
+      message: "Group couldn't be found",
+      statusCode: 404
+    }
+    return res.status(404).json(errObj);
+  }
+});
+
 module.exports = router;
