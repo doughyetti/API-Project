@@ -55,12 +55,14 @@ const restoreUser = (req, res, next) => {
 const requireAuth = function (req, _res, next) {
   if (req.user) {
     return next();
-  } else if (!req.user) {
-    const errObj = {
-      user: null
-    }
-    return _res.status(200).json(errObj);
-  } else {
+  }
+  // else if (!req.user) {
+  //   const errObj = {
+  //     user: null
+  //   }
+  //   return _res.status(200).json(errObj);
+  // }
+  else {
     const err = new Error('Unauthorized');
     err.title = 'Unauthorized';
     err.errors = ['Unauthorized'];

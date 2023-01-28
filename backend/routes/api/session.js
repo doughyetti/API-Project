@@ -19,10 +19,10 @@ const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage('Email is required'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage('Password is required'),
   handleValidationErrors
 ];
 
@@ -70,7 +70,7 @@ router.get(
       return res.json({
         user: user.toSafeObject()
       });
-    } else return res.json({});
+    } else return res.status(200).json({ "user": null });
   }
 );
 

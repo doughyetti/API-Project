@@ -74,25 +74,69 @@ router.get('/:groupId', async (req, res) => {
   res.json(group);
 });
 
-//POST image to group based on group id
-router.post('/:groupId/images', requireAuth, async (req, res) => {
-  const groupId = req.params.groupId;
+//PUT updates and returns existing group
+router.put('/:groupId', requireAuth, async (req, res) => {
   const { user } = req;
-  const ownerId = User.findOne({ where: {id: user.id} });
-  const { url, preview } = req.body;
+  const { name, about, type, private, city, state } = req.body;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
 
-  console.log(ownerId)
-  if (user.id === ownerId) {
-    const newImage = await groupsImage.create({
-      url, preview
-    });
-    return res.json(newImage);
+  if (group) {
+    const organizerId = group.organizerId;
+    if (user.id === organizerId) {
+      group.name = name;
+      group.about = about;
+      group.type = type;
+      group.private = private;
+      group.city = city;
+      group.state = state;
+      await group.save();
+
+      return res.json(group);
+    } else {
+      return res.status(403).json({
+        message: "User not authorized to add image",
+        statusCode: 403
+      });
+    }
   } else {
-    const errObj = {
+    return res.status(404).json({
       message: "Group couldn't be found",
       statusCode: 404
+    });
+  }
+});
+
+//POST image to group based on group id
+router.post('/:groupId/images', requireAuth, async (req, res) => {
+  const { user } = req;
+  const { url, preview } = req.body;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    const organizerId = group.organizerId;
+    if (user.id === organizerId) {
+      const newImage = await groupsImage.create({
+        groupId, url, preview
+      });
+
+      return res.json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+      });
+    } else {
+      return res.status(403).json({
+        message: "User not authorized to add image",
+        statusCode: 403
+      });
     }
-    return res.status(404).json(errObj);
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
   }
 });
 
