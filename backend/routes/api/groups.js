@@ -297,6 +297,54 @@ router.post('/:groupId/events', requireAuth, async (req, res) => {
   }
 });
 
+//GET all members of a group
+router.get('/:groupId/members', async (req, res) => {
+  const { user } = req;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+  const members = await User.findAll({
+    attributes: {
+      exclude: ['username']
+    },
+    include: [
+      {
+        model: Membership,
+        attributes: ['status'],
+        as: 'Membership'
+      }
+    ]
+  });
+
+  if (group) {
+    const organizerId = group.organizerId;
+
+    if (user.id !== organizerId) {
+      const pendingMembers = await User.findAll({
+        attributes: {
+          exclude: ['username']
+        },
+        include: [
+          {
+            model: Membership,
+            where: { status: ['co-host', 'member'] },
+            attributes: ['status'],
+            as: 'Membership'
+          }
+        ]
+      });
+
+      return res.json({ Members: pendingMembers })
+    } else {
+      return res.json({ Members: members })
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
 //POST request membership for group based on group ID
 router.post('/:groupId/membership', requireAuth, async (req, res) => {
   const { user } = req;
@@ -336,9 +384,39 @@ router.post('/:groupId/membership', requireAuth, async (req, res) => {
       statusCode: 404
     });
   }
+});
 
+//PUT change status of membership by group ID
+router.put('/:groupId/membership', requireAuth, async (req, res) => {
+  const { user } = req;
+  const { memberId, status } = req.body;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
 
+  if (group) {
+    const member = await Membership.findOne({
+      where: { groupId: groupId }
+    });
+    const organizerId = group.organizerId;
 
+    if (user.id === organizerId || member.status === 'co-host') {
+      member.status = status
+
+      await member.save();
+
+      return res.json({
+        id: user.id,
+        groupId: groupId,
+        memberId: member.userId,
+        status: member.status
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
 });
 
 module.exports = router;
