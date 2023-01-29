@@ -1,12 +1,28 @@
 const express = require('express')
 
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Group, User, Venue, groupsImage } = require('../../db/models');
+const { Group, User, Venue, groupsImage, Event, Membership } = require('../../db/models');
 
 const router = express.Router();
 
 router.use(restoreUser);
 
+const formatDate = (date) => {
+  const months = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+  let dateStr = "";
+  let month = "";
+
+  const dateArr = date.toString().split(' ');
+
+  month += (months.indexOf(dateArr[1]) + 1);
+  if (month.length === 1) month = ('0' + month);
+
+  dateStr += (dateArr[3] + '-' + month + '-' + dateArr[2] + ' ' + dateArr[4]);
+
+  return dateStr;
+};
 
 //GET all groups
 router.get('/', async (req, res) => {
@@ -197,7 +213,7 @@ router.post('/:groupId/venues', requireAuth, async (req, res) => {
       });
     } else {
       return res.status(403).json({
-        message: "User not authorized to add image",
+        message: "User not authorized to add venue",
         statusCode: 403
       });
     }
@@ -207,6 +223,122 @@ router.post('/:groupId/venues', requireAuth, async (req, res) => {
       statusCode: 404
     });
   }
+});
+
+//GET all events of a group
+router.get('/:groupId/events', async (req, res) => {
+  const groupId = Number(req.params.groupId);
+  const events = await Event.findAll({
+    where: { groupId: groupId },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt', 'description', 'capacity', 'price']
+    },
+    include: [
+      {
+        model: Group,
+        attributes: ['id', 'name', 'city', 'state']
+      },
+      {
+        model: Venue,
+        attributes: ['id', 'city', 'state']
+      }
+    ]
+  });
+
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    return res.json({ Events: events });
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//POST event by group ID
+router.post('/:groupId/events', requireAuth, async (req, res) => {
+  const { user } = req;
+  const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    const organizerId = group.organizerId;
+    if (user.id === organizerId) {
+      const newEvent = await Event.create({
+        groupId: groupId, venueId, name, type, capacity, price, description, startDate, endDate
+      });
+
+      return res.json({
+        id: newEvent.id,
+        groupId: groupId,
+        venueId: newEvent.venueId,
+        name: newEvent.name,
+        type: newEvent.type,
+        capacity: newEvent.capacity,
+        price: newEvent.price,
+        description: newEvent.description,
+        startDate: formatDate(newEvent.startDate),
+        endDate: formatDate(newEvent.endDate)
+      });
+    } else {
+      return res.status(403).json({
+        message: "User not authorized to create event",
+        statusCode: 403
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//POST request membership for group based on group ID
+router.post('/:groupId/membership', requireAuth, async (req, res) => {
+  const { user } = req;
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    const member = await Membership.findOne({
+      where: { userId: user.id}
+    });
+
+    if (!member) {
+      const newMember = await Membership.create({
+        userId: user.id, groupId: groupId, status: 'pending'
+      });
+
+      return res.json({
+        memberId: newMember.userId,
+        status: newMember.status
+      });
+    }
+
+    if (member.status === 'pending') {
+      return res.status(400).json({
+        message: "Membership has already been requested",
+        statusCode: 400
+      });
+    } else {
+      return res.status(400).json({
+        message: "User is already a member of the group",
+        statusCode: 400
+      });
+    }
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+
+
+
 });
 
 module.exports = router;

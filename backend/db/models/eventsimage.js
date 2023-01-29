@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      eventsImage.belongsTo(models.Event, { foreignKey: 'eventId' });
+      eventsImage.belongsTo(models.Event, { foreignKey: 'eventId', as: 'EventImages' });
     }
   }
   eventsImage.init({
@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING
+    },
+    preview: {
+      type: DataTypes.BOOLEAN,
     }
   }, {
     sequelize,

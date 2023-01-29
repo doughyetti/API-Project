@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Event.hasMany(models.Attendee, { foreignKey: 'eventId' });
       Event.belongsTo(models.Group, { foreignKey: 'groupId' });
       Event.belongsTo(models.Venue, { foreignKey: 'venueId' });
-      Event.hasMany(models.eventsImage, { foreignKey: 'eventId' });
+      Event.hasMany(models.eventsImage, { foreignKey: 'eventId', as: 'EventImages' });
     }
   }
   Event.init({
@@ -54,8 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     numAttending: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     previewImage: {
       type: DataTypes.STRING
