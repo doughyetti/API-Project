@@ -353,7 +353,7 @@ router.post('/:groupId/membership', requireAuth, async (req, res) => {
 
   if (group) {
     const member = await Membership.findOne({
-      where: { userId: user.id}
+      where: { userId: user.id }
     });
 
     if (!member) {

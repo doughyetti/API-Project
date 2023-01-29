@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { restoreUser, requireAuth } = require('../../utils/auth');
-const { Group, User, Venue, Event, eventsImage } = require('../../db/models');
+const { Group, User, Venue, Event, eventsImage, Membership, Attendee } = require('../../db/models');
 
 const router = express.Router();
 
@@ -138,7 +138,74 @@ router.put('/:eventId', requireAuth, async (req, res) => {
 
 //POST image to event based on event ID
 router.post('/:eventId/images', requireAuth, async (req, res) => {
+  const { user } = req;
+  const { url, preview } = req.body;
+  const eventId = Number(req.params.eventId);
+  const event = await Event.findByPk(eventId);
 
+  if (event) {
+    const newEventImg = await eventsImage.create({
+      eventId: eventId, url, preview
+    });
+
+    return res.json({
+      id: eventId,
+      url: newEventImg.url,
+      preview: newEventImg.preview
+    });
+  } else {
+    return res.status(404).json({
+      message: "Event couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//POST request to attend an event based on event ID
+router.post('/:eventId/attendance', requireAuth, async (req, res) => {
+  const { user } = req;
+  const eventId = Number(req.params.eventId);
+  const event = await Event.findByPk(eventId);
+  const member = await Membership.findOne({
+    where: { userId: user.id }
+  });
+
+  if (event) {
+
+    if (user.id === member.userId) {
+      const attendee = await Attendee.findOne({
+        where: { userId: user.id }
+      });
+
+      if (!attendee) {
+        const newAttendee = await Attendee.create({
+          userId: user.id, eventId: eventId, status: 'pending'
+        });
+
+        return res.json({
+          userId: newAttendee.userId,
+          status: newAttendee.status
+        });
+      }
+
+      if (attendee.status === 'pending') {
+        return res.status(400).json({
+          message: "Attendance has already been requested",
+          statusCode: 400
+        });
+      } else {
+        return res.status(400).json({
+          message: "User is already an attendee of the event",
+          statusCode: 400
+        });
+      }
+    }
+  } else {
+    return res.status(404).json({
+      message: "Event couldn't be found",
+      statusCode: 404
+    });
+  }
 });
 
 module.exports = router;
