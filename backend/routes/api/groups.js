@@ -389,7 +389,7 @@ router.post('/:groupId/membership', requireAuth, async (req, res) => {
 //PUT change status of membership by group ID
 router.put('/:groupId/membership', requireAuth, async (req, res) => {
   const { user } = req;
-  const { memberId, status } = req.body;
+  const { status } = req.body;
   const groupId = Number(req.params.groupId);
   const group = await Group.findByPk(groupId);
 
@@ -415,6 +415,59 @@ router.put('/:groupId/membership', requireAuth, async (req, res) => {
     return res.status(404).json({
       message: "Group couldn't be found",
       statusCode: 404
+    });
+  }
+});
+
+//DELETE existing group
+router.delete('/:groupId', requireAuth, async (req, res) => {
+  const groupId = Number(req.params.groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (group) {
+    Group.destroy({
+      where: { id: groupId }
+    });
+
+    return res.json({
+      message: "Successfully deleted",
+      statusCode: 200
+    });
+  } else {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+});
+
+//DELETE membership based on group Id
+router.delete('/:groupId/membership', requireAuth, async (req, res) => {
+  const { user } = req;
+  const groupId = Number(req.params.groupId);
+  const membership = await Membership.findByPk(groupId);
+  const group = await Group.findByPk(groupId);
+
+  if (!group) {
+    return res.status(404).json({
+      message: "Group couldn't be found",
+      statusCode: 404
+    });
+  }
+
+  if (membership) {
+    Membership.destroy({
+      where: { groupId: groupId }
+    })
+
+    return res.json({
+      message: "Successfully deleted membership from group"
+    });
+  } else {
+    return res.status(400).json({
+      message: "Validation Error",
+      statusCode: 400,
+      errors: { memberId: "User couldn't be found" }
     });
   }
 });

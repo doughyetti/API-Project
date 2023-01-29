@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Attendee.belongsTo(models.User, { foreignKey: 'userId' });
+      Attendee.belongsTo(models.User, { foreignKey: 'userId', as: 'Attendance' });
       Attendee.belongsTo(models.Event, { foreignKey: 'eventId' });
     }
   }
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM,
-      values: ['member', 'waitlist', 'pending'],
+      values: ['attending', 'waitlist', 'pending'],
       allowNull: false
     }
   }, {

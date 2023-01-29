@@ -7,6 +7,8 @@ const usersRouter = require('./users.js');
 const groupsRouter = require('./groups.js');
 const venuesRouter = require('./venue.js');
 const eventsRouter = require('./event.js');
+const groupImagesRouter = require('./group-images');
+const eventImagesRouter = require('./event-images');
 
 router.use(restoreUser);
 
@@ -15,6 +17,8 @@ router.use('/users', usersRouter);
 router.use('/groups', groupsRouter);
 router.use('/venues', venuesRouter);
 router.use('/events', eventsRouter);
+router.use('/group-images', groupImagesRouter);
+router.use('/event-images', eventImagesRouter);
 
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
