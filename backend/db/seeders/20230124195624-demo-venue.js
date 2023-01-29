@@ -17,6 +17,22 @@ module.exports = {
         state: 'NY',
         lat: 37.7645358,
         lng: -122.4730327
+      },
+      {
+        groupId: 1,
+        address: '234 Marvel Lane',
+        city: 'Austin',
+        state: 'TX',
+        lat: 37.7645358,
+        lng: -122.4730327
+      },
+      {
+        groupId: 1,
+        address: '456 DC Lane',
+        city: 'LA',
+        state: 'CA',
+        lat: 37.7645358,
+        lng: -122.4730327
       }
     ], {});
   },
@@ -24,7 +40,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     options.tableName = 'Venues';
     await queryInterface.bulkDelete(options, {
-      address: '123 Disney Lane'
+      address: ['123 Disney Lane', '234 Marvel Lane', '456 DC Lane']
     }, {});
   }
 };

@@ -22,6 +22,32 @@ module.exports = {
         endDate: new Date('2021-11-19 22:00:00'),
         numAttending: 8,
         previewImage: 'image url'
+      },
+      {
+        groupId: 1,
+        venueId: 1,
+        name: 'Ball w the boisss',
+        description: 'First meet and greet event for the evening bball on the water group! Join us online for happy times!',
+        type: 'Online',
+        capacity: 10,
+        price: 18.50,
+        startDate: new Date('2021-11-19 20:00:00'),
+        endDate: new Date('2021-11-19 22:00:00'),
+        numAttending: 8,
+        previewImage: 'image url'
+      },
+      {
+        groupId: 1,
+        venueId: 1,
+        name: 'Climbing w the crew',
+        description: 'First meet and greet event for the evening bouldering on the water group! Join us online for happy times!',
+        type: 'Online',
+        capacity: 10,
+        price: 18.50,
+        startDate: new Date('2021-11-19 20:00:00'),
+        endDate: new Date('2021-11-19 22:00:00'),
+        numAttending: 8,
+        previewImage: 'image url'
       }
     ], {});
   },
@@ -29,7 +55,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     options.tableName = 'Events';
     await queryInterface.bulkDelete(options, {
-      name: 'Tennis Group First Meet and Greet'
+      name: ['Tennis Group First Meet and Greet', 'Ball w the boisss', 'Climbing w the crew']
     }, {});
   }
 };

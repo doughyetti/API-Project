@@ -8,31 +8,31 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    options.tableName = 'groupsImages';
+    options.tableName = 'eventsImages';
     await queryInterface.bulkInsert(options, [
       {
-        groupId: 1,
+        eventId: 1,
         url: "image url",
         preview: true
       },
       {
-        groupId: 1,
+        eventId: 1,
         url: "image url",
         preview: false
       },
       {
-        groupId: 1,
+        eventId: 1,
         url: "image url",
-        preview: false
+        preview: true
       }
     ], {});
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = 'groupsImages';
+    options.tableName = 'eventsImages';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      groupId: { [Op.in]: [1] }
+      eventId: { [Op.in]: [1] }
     }, {});
   }
 };
