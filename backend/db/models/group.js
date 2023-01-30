@@ -49,6 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     numMembers: {
       type: DataTypes.INTEGER,
+      defaultValue: 0
     },
     previewImage: {
       type: DataTypes.STRING
@@ -56,11 +57,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Group',
-    defaultScope: {
-      attributes: {
-        exclude: ['numMembers', 'previewImage']
-      }
-    }
+    // defaultScope: {
+    //   attributes: {
+    //     exclude: ['numMembers', 'previewImage']
+    //   }
+    // }
   });
   return Group;
 };

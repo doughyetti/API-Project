@@ -28,6 +28,31 @@ const formatDate = (date) => {
 router.get('/', async (req, res) => {
   const Groups = await Group.findAll();
 
+  for await (let group of Groups) {
+    const img = await groupsImage.findOne({
+      where: { groupId: group.id }
+    });
+
+    if (img) {
+      group.dataValues.previewImage = img.url
+    } else {
+      group.dataValues.previewImage = 'no img url'
+    }
+    const members = await Membership.findAll({
+      where: { groupId: group.id }
+    });
+
+    if (members.length) {
+      let sum = 0;
+      members.forEach(member => {
+        sum++;
+      });
+      group.dataValues.numMembers = sum;
+    } else {
+      group.dataValues.numMembers = 0;
+    }
+  };
+
   return res.json({ Groups });
 });
 
@@ -39,7 +64,18 @@ router.post('/', requireAuth, async (req, res) => {
     organizerId: req.user.id, name, about, type, private, city, state
   });
 
-  return res.status(201).json(newGroup);
+  return res.status(201).json({
+    id: newGroup.id,
+    organizerId: newGroup.organizerId,
+    name: newGroup.name,
+    about: newGroup.about,
+    type: newGroup.type,
+    private: newGroup.private,
+    city: newGroup.city,
+    state: newGroup.state,
+    createdAt: newGroup.createdAt,
+    updatedAt: newGroup.updatedAt
+  });
 });
 
 //GET all groups by Current User
@@ -49,10 +85,35 @@ router.get('/current', requireAuth, async (req, res) => {
     where: { organizerId: user.id }
   });
 
+  for await (let group of Groups) {
+    const img = await groupsImage.findOne({
+      where: { groupId: group.id }
+    });
+
+    if (img) {
+      group.dataValues.previewImage = img.url
+    } else {
+      group.dataValues.previewImage = 'no img url'
+    }
+    const members = await Membership.findAll({
+      where: { groupId: group.id }
+    });
+
+    if (members.length) {
+      let sum = 0;
+      members.forEach(member => {
+        sum++;
+      });
+      group.dataValues.numMembers = sum;
+    } else {
+      group.dataValues.numMembers = 0;
+    }
+  };
+
   return res.json({ Groups });
 });
 
-//GET Group from id
+//GET details of group from id
 router.get('/:groupId', async (req, res) => {
   const groupId = req.params.groupId;
   const group = await Group.findOne({

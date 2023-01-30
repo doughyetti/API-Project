@@ -56,7 +56,8 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       numMembers: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       previewImage: {
         type: Sequelize.STRING
