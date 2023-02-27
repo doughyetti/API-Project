@@ -63,7 +63,7 @@ router.delete(
 // Get current user
 router.get(
   '/',
-  requireAuth,
+  restoreUser,
   (req, res) => {
     const { user } = req;
     if (user) {
