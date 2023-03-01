@@ -19,7 +19,7 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'img url'
       },
       {
         organizerId: 1,
@@ -30,7 +30,7 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'img url'
       },
       {
         organizerId: 1,
@@ -41,7 +41,7 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'img url'
       }
     ], {});
   },
