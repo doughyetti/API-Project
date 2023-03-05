@@ -24,8 +24,8 @@ module.exports = {
         previewImage: 'image url'
       },
       {
-        groupId: 1,
-        venueId: 1,
+        groupId: 2,
+        venueId: 2,
         name: 'Ball w the boisss',
         description: 'First meet and greet event for the evening bball on the water group! Join us online for happy times!',
         type: 'Online',
@@ -37,8 +37,8 @@ module.exports = {
         previewImage: 'image url'
       },
       {
-        groupId: 1,
-        venueId: 1,
+        groupId: 3,
+        venueId: 3,
         name: 'Climbing w the crew',
         description: 'First meet and greet event for the evening bouldering on the water group! Join us online for happy times!',
         type: 'Online',

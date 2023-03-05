@@ -12,21 +12,27 @@ const GroupsPage = () => {
 
   return (
     <>
-      <h1>Events</h1>
-      <h1>Groups</h1>
-      <h3>Groups in Meetup</h3>
+      <div className='allGroups-card'>
+        <h1>Events</h1>
+        <h1>Groups</h1>
+        <h3>Groups in Meetup</h3>
+      </div>
       <div>
         {allGroups.map(({ id, previewImage, name, city, state, about }) => (
-        <>
-          <img src={previewImage} alt={name}/>
-          <h1 key={id}>{name}</h1>
-          <h3>{city}, {state}</h3>
-          <div>{about}</div>
-        </>
+          <>
+            <div className='group-card'>
+              <img src={previewImage} alt={name} />
+              <h1 key={id}>{name}</h1>
+              <h3>{city}, {state}</h3>
+              <p>{about}</p>
+              {allGroups.private && <h4>Private</h4>}
+              {!allGroups.private && <h4>Public</h4>}
+            </div>
+          </>
         ))}
       </div>
     </>
   )
-}
+};
 
 export default GroupsPage;
