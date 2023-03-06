@@ -22,7 +22,7 @@ module.exports = {
         previewImage: 'img url'
       },
       {
-        organizerId: 1,
+        organizerId: 2,
         name: 'Ball w the boisss',
         about: 'Enjoy rounds of bball with a tight-nit group of people on the water facing the Brooklyn Bridge. 1v1s and 5v5s.',
         type: 'In Person',
@@ -33,7 +33,7 @@ module.exports = {
         previewImage: 'img url'
       },
       {
-        organizerId: 1,
+        organizerId: 3,
         name: 'Climbing w the crew',
         about: 'Enjoy bouldering with a tight-nit group of people on the water facing the Brooklyn Bridge. dynos only brah.',
         type: 'In Person',

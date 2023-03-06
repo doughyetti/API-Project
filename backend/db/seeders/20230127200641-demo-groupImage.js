@@ -13,11 +13,11 @@ module.exports = {
       {
         groupId: 1,
         url: "https://res.cloudinary.com/dcbexnl8j/image/upload/v1677636204/meetup%20shit/31virus-tennis02-mobileMasterAt3x-v2_h8qv6x.jpg",
-        preview: true
+        preview: false
       },
       {
         groupId: 2,
-        url: "https://res.cloudinary.com/dcbexnl8j/image/upload/v1677636560/meetup%20shit/dbce550de6db84c5d0b2576517a9bcb5_dgoxxa.jpg",
+        url: "https://res.cloudinary.com/dcbexnl8j/image/upload/v1677978779/meetup%20shit/funny-basketball-picture_zw1e7t.jpg",
         preview: false
       },
       {

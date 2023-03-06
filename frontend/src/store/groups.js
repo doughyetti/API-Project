@@ -1,14 +1,11 @@
+import { csrfFetch } from './csrf';
+
 const GET_GROUPS = 'groups/GET_GROUPS';
 const GROUP_DETAIL = 'groups/GROUP_DETAIL';
 
 const getGroups = (groups) => ({
   type: GET_GROUPS,
   groups
-});
-
-const groupDetail = (group) => ({
-  type: GROUP_DETAIL,
-  group
 });
 
 export const getAllGroups = () => async (dispatch) => {
@@ -22,8 +19,13 @@ export const getAllGroups = () => async (dispatch) => {
   }
 };
 
-export const getGroupDetail = (group) => async (dispatch) => {
-  const res = await fetch(`/api/groups/${group.id}`);
+const groupDetail = (group) => ({
+  type: GROUP_DETAIL,
+  group
+});
+
+export const getGroupDetail = (groupId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/groups/${groupId}`);
 
   if (res.ok) {
     const data = await res.json();
@@ -33,7 +35,9 @@ export const getGroupDetail = (group) => async (dispatch) => {
   }
 };
 
-const initialState = {};
+const initialState = {
+  currentGroup: {}
+};
 
 const groupsReducer = (state = initialState, action) => {
   let newState = {};
@@ -44,7 +48,7 @@ const groupsReducer = (state = initialState, action) => {
       return newState;
     }
     case GROUP_DETAIL: {
-      newState = {...state, [action.group.id]: action.group}
+      newState = {...state, currentGroup: action.group}
       return newState
     }
     default:
