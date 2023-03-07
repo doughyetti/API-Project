@@ -30,7 +30,7 @@ const GroupDetail = () => {
         </div>
 
         <div className='group-info'>
-          {/* <img src={group?.GroupImages?.url} alt='group' /> */}
+          <img src={group?.GroupImages[0]?.url} alt='group' />
           <div className='group-main-text'>
             <h1>{group?.name}</h1>
             <h4>{group?.city}, {group?.state}</h4>
