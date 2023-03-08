@@ -58,10 +58,10 @@ router.get('/', async (req, res) => {
 
 //POST new group
 router.post('/', requireAuth, async (req, res) => {
-  const { name, about, type, private, city, state } = req.body;
+  const { name, about, type, private, city, state, previewImage } = req.body;
 
   const newGroup = await Group.create({
-    organizerId: req.user.id, name, about, type, private, city, state
+    organizerId: req.user.id, name, about, type, private, city, state, previewImage
   });
 
   return res.status(201).json({
@@ -73,6 +73,7 @@ router.post('/', requireAuth, async (req, res) => {
     private: newGroup.private,
     city: newGroup.city,
     state: newGroup.state,
+    previewImage: newGroup.previewImage,
     createdAt: newGroup.createdAt,
     updatedAt: newGroup.updatedAt
   });
@@ -118,9 +119,9 @@ router.get('/:groupId', async (req, res) => {
   const groupId = req.params.groupId;
   const group = await Group.findOne({
     where: { id: groupId },
-    attributes: {
-      exclude: ['previewImage']
-    },
+    // attributes: {
+    //   exclude: ['previewImage']
+    // },
     include: [
       {
         model: groupsImage,

@@ -26,9 +26,9 @@ const GroupsPage = () => {
         <div>
           {allGroups.map(({ id, previewImage, name, city, state, about }) => (
             <>
-              <div className='group-card' onClick={() => history.push(`/groups/${id}`)}>
+              <div className='group-card' key={id} onClick={() => history.push(`/groups/${id}`)}>
                 <img src={previewImage} alt={name} />
-                <h1 key={id}>{name}</h1>
+                <h1>{name}</h1>
                 <h3>{city}, {state}</h3>
                 <p>{about}</p>
                 {allGroups.private && <h4>Private</h4>}

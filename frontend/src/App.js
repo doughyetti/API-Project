@@ -8,12 +8,13 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import GroupsPage from "./components/GroupsPage";
 import GroupDetail from "./components/GroupDetail";
+import NewGroupForm from "./components/NewGroupForm";
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route exact path="/groups">
             <GroupsPage />
+          </Route>
+          <Route exact path='/groups/new'>
+            <NewGroupForm />
           </Route>
           <Route exact path='/groups/:groupId'>
             <GroupDetail />
