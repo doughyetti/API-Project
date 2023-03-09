@@ -8,7 +8,8 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import GroupsPage from "./components/GroupsPage";
 import GroupDetail from "./components/GroupDetail";
-import NewGroupForm from "./components/NewGroupForm";
+import NewGroupForm from "./components/GroupNewForm";
+import UpdateGroupForm from "./components/GroupUpdate";
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route exact path='/groups/:groupId'>
             <GroupDetail />
+          </Route>
+          <Route exact path='/groups/:groupId/edit'>
+            <UpdateGroupForm />
           </Route>
         </Switch>
       )}

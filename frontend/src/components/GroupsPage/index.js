@@ -9,7 +9,7 @@ const GroupsPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const allGroups = useSelector((state) => Object.values(state.groups));
+  const allGroups = useSelector((state) => Object.values(state.groups.allGroups));
 
   useEffect(() => {
     dispatch(getAllGroups());
@@ -25,7 +25,6 @@ const GroupsPage = () => {
         <h3>Groups in Meetup</h3>
         <div>
           {allGroups.map(({ id, previewImage, name, city, state, about }) => (
-            <>
               <div className='group-card' key={id} onClick={() => history.push(`/groups/${id}`)}>
                 <img src={previewImage} alt={name} />
                 <h1>{name}</h1>
@@ -34,7 +33,6 @@ const GroupsPage = () => {
                 {allGroups.private && <h4>Private</h4>}
                 {!allGroups.private && <h4>Public</h4>}
               </div>
-            </>
           ))}
         </div>
       </div>

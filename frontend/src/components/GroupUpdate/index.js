@@ -1,28 +1,41 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import * as groupActions from '../../store/groups';
 
-const NewGroupForm = () => {
+const UpdateGroupForm = () => {
+
   const dispatch = useDispatch();
   const history = useHistory();
+  const group = useSelector(state => state.groups.currentGroup);
+  let { groupId } = useParams();
+  let { city, state, name, about, type } = group;
+  let privacy = group.private;
 
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [name, setName] = useState('');
-  const [about, setAbout] = useState('');
-  const [type, setType] = useState('');
-  const [privacy, setPrivacy] = useState('');
-  const [imgUrl, setImgUrl] = useState('');
+  const [updatedCity, setUpdatedCity] = useState(city);
+  const [updatedState, setUpdatedState] = useState(state);
+  const [updatedName, setUpdatedName] = useState(name);
+  const [updatedAbout, setUpdatedAbout] = useState(about);
+  const [updatedType, setUpdatedType] = useState(type);
+  const [updatedPrivacy, setUpdatedPrivacy] = useState(privacy);
+  // const [imgUrl, setImgUrl] = useState('');
   const [errors, setErrors] = useState([]);
+
+  const goBack = () => {
+    history.goBack();
+  };
+
+  useEffect(() => {
+    dispatch(groupActions.getGroupDetail(groupId))
+  }, [dispatch, groupId])
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const group = { city, state, name, about, type, private: privacy, previewImage: imgUrl }
+    const group = { city: updatedCity, state: updatedState, name: updatedName, about: updatedAbout, type: updatedType, private: updatedPrivacy }
 
-    return dispatch(groupActions.createNewGroup(group))
-      .then((res) => history.push(`/groups/${res.id}`))
+    return dispatch(groupActions.updateGroup(group, groupId))
+      .then(() => goBack())
       .catch(async (res) => {
         const data = await res.json();
 
@@ -33,7 +46,7 @@ const NewGroupForm = () => {
   return (
     <div id='main-form-container'>
       <div className='sub-form-container'>
-        <h3>BECOME AN ORGANIZER</h3>
+        <h3>UPDATE YOUR GROUP'S INFORMATION</h3>
         <h1>We'll walk you through a few steps to build your local community</h1>
 
         <form onSubmit={handleSubmit}>
@@ -42,14 +55,14 @@ const NewGroupForm = () => {
             <h3>Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.</h3>
             <input
               type='text'
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={updatedCity}
+              onChange={(e) => setUpdatedCity(e.target.value)}
               required
               placeholder='City' name='city'></input>
             <input
               type='text'
-              value={state}
-              onChange={(e) => setState(e.target.value)}
+              value={updatedState}
+              onChange={(e) => setUpdatedState(e.target.value)}
               required
               placeholder='State' name='state'></input>
           </div>
@@ -59,8 +72,8 @@ const NewGroupForm = () => {
             <h3>Choose a name that will give people a clear idea of what the group is about. Feel free to get creative! You can edit this later if you change your mind.</h3>
             <input
               type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={updatedName}
+              onChange={(e) => setUpdatedName(e.target.value)}
               required
               placeholder='Group Name' name='name'></input>
           </div>
@@ -75,8 +88,8 @@ const NewGroupForm = () => {
             </ol>
             <textarea
               type='text'
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
+              value={updatedAbout}
+              onChange={(e) => setUpdatedAbout(e.target.value)}
               required
               placeholder='Please write at least 30 characters' name='about'></textarea>
           </div>
@@ -87,8 +100,8 @@ const NewGroupForm = () => {
               <h3>Is this an in person or online group?</h3>
               <select
                 name='meeting type'
-                value={type}
-                onChange={(e) => setType(e.target.value)}
+                value={updatedType}
+                onChange={(e) => setUpdatedType(e.target.value)}
                 required
               >
                 <option value=''>(select one)</option>
@@ -101,8 +114,8 @@ const NewGroupForm = () => {
               <h3>Is this group private or public?</h3>
               <select
                 name='privacy'
-                value={privacy}
-                onChange={(e) => setPrivacy(e.target.value)}
+                value={updatedPrivacy}
+                onChange={(e) => setUpdatedPrivacy(e.target.value)}
                 required
               >
                 <option value=''>(select one)</option>
@@ -111,7 +124,7 @@ const NewGroupForm = () => {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <h3>Please add an image url for your group below:</h3>
               <input
                 type='text'
@@ -119,15 +132,15 @@ const NewGroupForm = () => {
                 onChange={(e) => setImgUrl(e.target.value)}
                 required
                 placeholder='Image url' name='image url'></input>
-            </div>
+            </div> */}
           </div>
 
           {errors && <ul className='errors'>
               {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>}
 
-          <button type='submit' className='submit-button'>
-            Create New Group
+          <button type='submit' className='update-button'>
+            Update Group
           </button>
 
         </form>
@@ -137,4 +150,4 @@ const NewGroupForm = () => {
 };
 
 
-export default NewGroupForm;
+export default UpdateGroupForm;

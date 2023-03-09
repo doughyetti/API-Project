@@ -20,27 +20,18 @@ const GroupDetail = () => {
 
   const goBack = () => {
     history.goBack();
-  }
+  };
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to remove this group?')) {
       dispatch(groupActions.removeGroup(groupId))
       history.push(`/groups`);
     }
-    // confirmAlert({
-    //   title: 'Confirm Delete?',
-    //   desc: 'Are you sure you want to remove this group?',
-    //   onOk: () => {
-    //     return dispatch(groupActions.removeGroup(groupId))
-    //       .then(() => history.push(`/groups`))
-    //       .catch(async (res) => {
-    //         const data = await res.json();
-    //         return data;
-    //       })
-    //   },
-    //   onCancel: () => { }
-    // })
-  }
+  };
+
+  const handleUpdate = () => {
+    history.push(`/groups/${groupId}/edit`);
+  };
 
   return (
     loaded && <div className='group-detail-container'>
@@ -51,7 +42,7 @@ const GroupDetail = () => {
         </div>
 
         <div className='group-info'>
-          {group?.GroupImages[0] && <img src={group?.GroupImages[0]?.url} alt='group' />}
+          <img src={group?.previewImage} alt='group' />
           <div className='group-main-text'>
             <h1>{group?.name}</h1>
             <h4>{group?.city}, {group?.state}</h4>
@@ -61,6 +52,7 @@ const GroupDetail = () => {
 
           <div className='group-info-buttons'>
             <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleUpdate}>Update</button>
           </div>
         </div>
 

@@ -64,19 +64,20 @@ router.post('/', requireAuth, async (req, res) => {
     organizerId: req.user.id, name, about, type, private, city, state, previewImage
   });
 
-  return res.status(201).json({
-    id: newGroup.id,
-    organizerId: newGroup.organizerId,
-    name: newGroup.name,
-    about: newGroup.about,
-    type: newGroup.type,
-    private: newGroup.private,
-    city: newGroup.city,
-    state: newGroup.state,
-    previewImage: newGroup.previewImage,
-    createdAt: newGroup.createdAt,
-    updatedAt: newGroup.updatedAt
-  });
+  return res.redirect(`/api/groups/${newGroup.id}`)
+  // return res.status(201).json({
+  //   id: newGroup.id,
+  //   organizerId: newGroup.organizerId,
+  //   name: newGroup.name,
+  //   about: newGroup.about,
+  //   type: newGroup.type,
+  //   private: newGroup.private,
+  //   city: newGroup.city,
+  //   state: newGroup.state,
+  //   previewImage: newGroup.previewImage,
+  //   createdAt: newGroup.createdAt,
+  //   updatedAt: newGroup.updatedAt
+  // });
 });
 
 //GET all groups by Current User

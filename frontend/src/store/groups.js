@@ -11,7 +11,7 @@ const getGroups = (groups) => ({
 });
 
 export const getAllGroups = () => async (dispatch) => {
-  const res = await fetch('/api/groups');
+  const res = await csrfFetch('/api/groups');
 
   if (res.ok) {
     const data = await res.json();
@@ -43,16 +43,38 @@ const newGroup = (group) => ({
 });
 
 export const createNewGroup = (group) => async (dispatch) => {
+  const { previewImage } = group;
+
   const res = await csrfFetch(`/api/groups`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(group)
   });
 
   if (res.ok) {
     const data = await res.json();
 
+    const imgObj = { url: previewImage, groupId: data.id, preview: true };
+
+    await csrfFetch(`/api/groups/${data.id}/images`, {
+      method: 'POST',
+      body: JSON.stringify(imgObj)
+    });
+
     dispatch(newGroup(data));
+    return data;
+  }
+};
+
+export const updateGroup = (group, groupId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/groups/${groupId}`, {
+    method: 'PUT',
+    body: JSON.stringify(group)
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+
+    dispatch(newGroup(group));
     return data;
   }
 };
@@ -84,20 +106,26 @@ const groupsReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case GET_GROUPS: {
-      action.groups.Groups.forEach((group) => (newState[group.id] = group));
-      return newState;
+      return {
+        ...state, allGroups: [...action.groups.Groups]
+      };
     }
     case GROUP_DETAIL: {
-      newState = {...state, currentGroup: action.group}
+      newState = { ...state, currentGroup: action.group }
       return newState
     }
     case NEW_GROUP: {
-      newState = {...state, [action.group.id]: action.group}
-      return newState;
+      if (!state.allGroups[action.group.id]) {
+        newState = { ...state, allGroups: [...state.allGroups, action.group] }
+        return newState;
+      } else {
+        newState = { ...state, allGroups: [...state.allGroups, state.allGroups[action.group.id], action.group] }
+        return newState;
+      }
     }
     case DELETE_GROUP: {
       newState = {...state}
-      delete newState[action.groupId]
+      delete newState.allGroups[action.groupId]
       return newState;
     }
     default:
