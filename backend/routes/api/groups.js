@@ -486,16 +486,15 @@ router.put('/:groupId/membership', requireAuth, async (req, res) => {
 router.delete('/:groupId', requireAuth, async (req, res) => {
   const groupId = Number(req.params.groupId);
   const group = await Group.findByPk(groupId);
-
+  console.log(group, groupId)
   if (group) {
-    Group.destroy({
-      where: { id: groupId }
-    });
+    // await Group.destroy({
+    //   where: { id: groupId }
+    // });
 
-    return res.json({
-      message: "Successfully deleted",
-      statusCode: 200
-    });
+    await group.destroy();
+
+    return res.json(group);
   } else {
     return res.status(404).json({
       message: "Group couldn't be found",

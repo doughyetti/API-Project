@@ -27,9 +27,9 @@ const GroupDetail = () => {
     history.goBack();
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('Are you sure you want to remove this group?')) {
-      dispatch(groupActions.removeGroup(groupId))
+      await dispatch(groupActions.removeGroup(groupId))
       history.push(`/groups`);
     }
   };
