@@ -4,6 +4,7 @@ const GET_GROUPS = 'groups/GET_GROUPS';
 const GROUP_DETAIL = 'groups/GROUP_DETAIL';
 const NEW_GROUP = 'groups/ADD_GROUP';
 const DELETE_GROUP = 'groups/DELETE_GROUP';
+const GROUP_EVENTS = 'groups/GROUP_EVENTS';
 
 const getGroups = (groups) => ({
   type: GET_GROUPS,
@@ -82,7 +83,7 @@ export const updateGroup = (group, groupId) => async (dispatch) => {
 const deleteGroup = (groupId) => ({
   type: DELETE_GROUP,
   groupId
-})
+});
 
 export const removeGroup = (groupId) => async (dispatch) => {
   const res = await csrfFetch(`/api/groups/${groupId}`, {
@@ -94,11 +95,28 @@ export const removeGroup = (groupId) => async (dispatch) => {
     dispatch(deleteGroup(groupId));
     return data;
   }
-}
+};
+
+const groupEvents = (events) => ({
+  type: GROUP_EVENTS,
+  events
+});
+
+export const getGroupEvents = (groupId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/groups/${groupId}/events`);
+
+  if (res.ok) {
+    const data = await res.json();
+    
+    dispatch(groupEvents(data.Events));
+    return data;
+  }
+};
 
 const initialState = {
   allGroups: [],
-  currentGroup: {}
+  currentGroup: {},
+  currentGroupEvents: []
 };
 
 const groupsReducer = (state = initialState, action) => {
@@ -119,13 +137,17 @@ const groupsReducer = (state = initialState, action) => {
         newState = { ...state, allGroups: [...state.allGroups, action.group] }
         return newState;
       } else {
-        newState = { ...state, allGroups: [...state.allGroups, state.allGroups[action.group.id], action.group] }
+        newState = { ...state, currentGroup: action.group }
         return newState;
       }
     }
     case DELETE_GROUP: {
       newState = {...state}
       delete newState.allGroups[action.groupId]
+      return newState;
+    }
+    case GROUP_EVENTS: {
+      newState = {...state, currentGroupEvents: action.events}
       return newState;
     }
     default:

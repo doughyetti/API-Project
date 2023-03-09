@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
+import GroupEventsComponent from './GroupEvents';
 import * as groupActions from '../../store/groups';
-// import { confirmAlert } from 'react-confirm-alert';
+
+import './GroupDetail.css';
 
 const GroupDetail = () => {
   const dispatch = useDispatch();
@@ -10,11 +12,14 @@ const GroupDetail = () => {
   const { groupId } = useParams();
 
   const group = useSelector((state) => state.groups.currentGroup);
+  const events = useSelector((state) => state.groups.currentGroupEvents);
+
 
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(groupActions.getGroupDetail(groupId))
+    dispatch(groupActions.getGroupEvents(groupId))
     setLoaded(true)
   }, [dispatch, groupId])
 
@@ -63,6 +68,9 @@ const GroupDetail = () => {
         <h4>{group?.Organizer?.firstName} {group?.Organizer?.lastName}</h4>
         <h2>What we're about</h2>
         <p>{group?.about}</p>
+      </div>
+      <div className='events'>
+        <GroupEventsComponent events={events} />
       </div>
     </div>
   )
