@@ -23,6 +23,7 @@ const GroupsPage = () => {
           <h1>Groups</h1>
         </div>
         <h3>Groups in Meetup</h3>
+        
         <div>
           {allGroups.map(({ id, previewImage, name, city, state, about }) => (
               <div className='group-card' key={id} onClick={() => history.push(`/groups/${id}`)}>

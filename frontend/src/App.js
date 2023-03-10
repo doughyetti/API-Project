@@ -10,6 +10,7 @@ import GroupsPage from "./components/GroupsPage";
 import GroupDetail from "./components/GroupDetail";
 import NewGroupForm from "./components/GroupNewForm";
 import UpdateGroupForm from "./components/GroupUpdate";
+import EventsPage from "./components/EventsPage";
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route exact path='/groups/:groupId/edit'>
             <UpdateGroupForm />
+          </Route>
+          <Route exact path='/events'>
+            <EventsPage />
           </Route>
         </Switch>
       )}

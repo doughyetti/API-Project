@@ -7,13 +7,13 @@ const allEvents = (events) => ({
   events
 });
 
-const getAllEvents = () => async (dispatch) => {
+export const getAllEvents = () => async (dispatch) => {
   const res = await csrfFetch('/api/events');
 
   if (res.ok) {
-    const data = res.json();
-
-    dispatch(allEvents(events));
+    const data = await res.json();
+    
+    dispatch(allEvents(data));
     return data;
   }
 };
@@ -25,11 +25,14 @@ const initialState = {
 
 const eventsReducer = (state = initialState, action) => {
   let newState = {};
+
   switch (action.type) {
     case ALL_EVENTS:
-      return {...state, allEvents: [...action.events.Events]};
-  default:
-    return state;
+      return {
+        ...state, allEvents: [...action.events.Events]
+      };
+    default:
+      return state;
   }
 };
 

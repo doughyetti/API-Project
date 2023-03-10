@@ -86,15 +86,15 @@ const deleteGroup = (groupId) => ({
 });
 
 export const removeGroup = (groupId) => async (dispatch) => {
-  
+
   const res = await csrfFetch(`/api/groups/${groupId}`, {
     method: 'DELETE'
   });
-  console.log(res);
+
   if (res.ok) {
     const data = await res.json();
 
-    dispatch(deleteGroup(data));
+    dispatch(deleteGroup(groupId));
     return data;
   }
 };
@@ -145,7 +145,7 @@ const groupsReducer = (state = initialState, action) => {
     }
     case DELETE_GROUP: {
       newState = {...state}
-      delete newState.allGroups[action.groupId.id]
+      delete newState.allGroups[action.groupId]
       return newState;
     }
     case GROUP_EVENTS: {
