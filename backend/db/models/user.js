@@ -40,9 +40,9 @@ module.exports = (sequelize, DataTypes) => {
       return await User.scope('currentUser').findByPk(user.id);
     }
     static associate(models) {
-      User.hasOne(models.Group, { foreignKey: 'organizerId' });
-      User.hasMany(models.Membership, { foreignKey: 'userId', as: 'Membership' });
-      User.hasMany(models.Attendee, { foreignKey: 'userId', as: 'Attendance' });
+      User.hasOne(models.Group, { foreignKey: 'organizerId', onDelete: 'CASCADE' });
+      User.hasMany(models.Membership, { foreignKey: 'userId', as: 'Membership', onDelete: 'CASCADE' });
+      User.hasMany(models.Attendee, { foreignKey: 'userId', as: 'Attendance', onDelete: 'CASCADE' });
     }
   }
   User.init({

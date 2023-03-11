@@ -496,7 +496,7 @@ router.delete('/:groupId', requireAuth, async (req, res) => {
         id: groupId
       }
     });
-
+    console.log(groupDel)
     await groupDel.destroy();
 
     return res.json(group);

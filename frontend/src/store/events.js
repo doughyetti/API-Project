@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const ALL_EVENTS = 'events/ALL_EVENTS';
 
+
 const allEvents = (events) => ({
   type: ALL_EVENTS,
   events
@@ -12,11 +13,13 @@ export const getAllEvents = () => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json();
-    
+
     dispatch(allEvents(data));
     return data;
   }
 };
+
+
 
 const initialState = {
   allEvents: [],
