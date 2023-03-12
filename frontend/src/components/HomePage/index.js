@@ -1,10 +1,17 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import './HomePage.css';
 
 const HomePage = () => {
+  const history = useHistory();
+
+  const handleSignup = () => {
+    history.push(`/signup`);
+  };
+
   return (
     <div className='grid-home-container'>
+
       <div className='grid item grid-item-1'>
         <div>
           <h1>The People platform - Where interests become friendships</h1>
@@ -23,10 +30,26 @@ const HomePage = () => {
 
       <div className='grid item grid-item-3'>
         <div>
-          <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1677877231/meetup%20shit/4575-scaled_rpvpck.webp' alt='groups-icon' />
-          <NavLink to='/groups'>See All Groups</NavLink>
+          <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1678644792/meetup%20shit/handsUp_onxtzl.svg' alt='groups-icon' />
+          <NavLink className ='grid-item-3-navlinks' to='/groups'>See All Groups</NavLink>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
         </div>
+
+        <div>
+          <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1678644548/meetup%20shit/ticket_vc9rya.svg' alt='events-icon' />
+          <NavLink className ='grid-item-3-navlinks' to='/events'>Find An Event</NavLink>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
+
+        <div>
+          <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1678644571/meetup%20shit/joinGroup_ufqm4a.svg' alt='create-group-icon' />
+          <NavLink className ='grid-item-3-navlinks' to='/events'>Start a group</NavLink>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
+      </div>
+
+      <div className='button-section'>
+        <button className='signup-button' onClick={handleSignup}>Join Meetup</button>
       </div>
     </div>
   )
