@@ -19,10 +19,10 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'https://res.cloudinary.com/dcbexnl8j/image/upload/v1677636204/meetup%20shit/31virus-tennis02-mobileMasterAt3x-v2_h8qv6x.jpg'
       },
       {
-        organizerId: 1,
+        organizerId: 2,
         name: 'Ball w the boisss',
         about: 'Enjoy rounds of bball with a tight-nit group of people on the water facing the Brooklyn Bridge. 1v1s and 5v5s.',
         type: 'In Person',
@@ -30,10 +30,10 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'https://res.cloudinary.com/dcbexnl8j/image/upload/v1677978779/meetup%20shit/funny-basketball-picture_zw1e7t.jpg'
       },
       {
-        organizerId: 1,
+        organizerId: 3,
         name: 'Climbing w the crew',
         about: 'Enjoy bouldering with a tight-nit group of people on the water facing the Brooklyn Bridge. dynos only brah.',
         type: 'In Person',
@@ -41,7 +41,7 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         numMembers: 10,
-        previewImage: 'image url'
+        previewImage: 'https://res.cloudinary.com/dcbexnl8j/image/upload/v1677636587/meetup%20shit/adam-ondra-9c-pavel-blazek_s_vez0hh.jpg'
       }
     ], {});
   },

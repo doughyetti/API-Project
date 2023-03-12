@@ -10,15 +10,16 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Groups', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       organizerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' }
+        references: { model: 'Users' },
+        onDelete: 'CASCADE'
       },
       name: {
         type: Sequelize.STRING,

@@ -19,7 +19,7 @@ module.exports = {
         lng: -122.4730327
       },
       {
-        groupId: 1,
+        groupId: 2,
         address: '234 Marvel Lane',
         city: 'Austin',
         state: 'TX',
@@ -27,7 +27,7 @@ module.exports = {
         lng: -122.4730327
       },
       {
-        groupId: 1,
+        groupId: 3,
         address: '456 DC Lane',
         city: 'LA',
         state: 'CA',

@@ -1,0 +1,11 @@
+.group-info img {
+  width: 25%;
+}
+
+.event-container {
+  cursor: pointer;
+}
+
+.event-container img {
+  width: 10%;
+}

@@ -58,24 +58,26 @@ router.get('/', async (req, res) => {
 
 //POST new group
 router.post('/', requireAuth, async (req, res) => {
-  const { name, about, type, private, city, state } = req.body;
+  const { name, about, type, private, city, state, previewImage } = req.body;
 
   const newGroup = await Group.create({
-    organizerId: req.user.id, name, about, type, private, city, state
+    organizerId: req.user.id, name, about, type, private, city, state, previewImage
   });
 
-  return res.status(201).json({
-    id: newGroup.id,
-    organizerId: newGroup.organizerId,
-    name: newGroup.name,
-    about: newGroup.about,
-    type: newGroup.type,
-    private: newGroup.private,
-    city: newGroup.city,
-    state: newGroup.state,
-    createdAt: newGroup.createdAt,
-    updatedAt: newGroup.updatedAt
-  });
+  return res.redirect(`/api/groups/${newGroup.id}`)
+  // return res.status(201).json({
+  //   id: newGroup.id,
+  //   organizerId: newGroup.organizerId,
+  //   name: newGroup.name,
+  //   about: newGroup.about,
+  //   type: newGroup.type,
+  //   private: newGroup.private,
+  //   city: newGroup.city,
+  //   state: newGroup.state,
+  //   previewImage: newGroup.previewImage,
+  //   createdAt: newGroup.createdAt,
+  //   updatedAt: newGroup.updatedAt
+  // });
 });
 
 //GET all groups by Current User
@@ -118,9 +120,9 @@ router.get('/:groupId', async (req, res) => {
   const groupId = req.params.groupId;
   const group = await Group.findOne({
     where: { id: groupId },
-    attributes: {
-      exclude: ['previewImage']
-    },
+    // attributes: {
+    //   exclude: ['previewImage']
+    // },
     include: [
       {
         model: groupsImage,
@@ -292,7 +294,7 @@ router.get('/:groupId/events', async (req, res) => {
   const events = await Event.findAll({
     where: { groupId: groupId },
     attributes: {
-      exclude: ['createdAt', 'updatedAt', 'description', 'capacity', 'price']
+      exclude: ['createdAt', 'updatedAt', 'capacity', 'price']
     },
     include: [
       {
@@ -321,7 +323,7 @@ router.get('/:groupId/events', async (req, res) => {
 //POST event by group ID
 router.post('/:groupId/events', requireAuth, async (req, res) => {
   const { user } = req;
-  const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+  const { venueId, name, type, capacity, price, description, startDate, endDate, previewImage } = req.body;
   const groupId = Number(req.params.groupId);
   const group = await Group.findByPk(groupId);
 
@@ -329,7 +331,7 @@ router.post('/:groupId/events', requireAuth, async (req, res) => {
     const organizerId = group.organizerId;
     if (user.id === organizerId) {
       const newEvent = await Event.create({
-        groupId: groupId, venueId, name, type, capacity, price, description, startDate, endDate
+        groupId: groupId, venueId, name, type, capacity, price, description, startDate, endDate, previewImage
       });
 
       return res.json({
@@ -341,6 +343,7 @@ router.post('/:groupId/events', requireAuth, async (req, res) => {
         capacity: newEvent.capacity,
         price: newEvent.price,
         description: newEvent.description,
+        previewImage: newEvent.previewImage,
         startDate: formatDate(newEvent.startDate),
         endDate: formatDate(newEvent.endDate)
       });
@@ -486,14 +489,18 @@ router.delete('/:groupId', requireAuth, async (req, res) => {
   const group = await Group.findByPk(groupId);
 
   if (group) {
-    Group.destroy({
-      where: { id: groupId }
+    // await Group.destroy({
+    //   where: { id: groupId }
+    // });
+    const groupDel = await Group.findOne({
+      where: {
+        id: groupId
+      }
     });
+    console.log(groupDel)
+    await groupDel.destroy();
 
-    return res.json({
-      message: "Successfully deleted",
-      statusCode: 200
-    });
+    return res.json(group);
   } else {
     return res.status(404).json({
       message: "Group couldn't be found",

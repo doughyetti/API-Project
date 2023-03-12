@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Event.hasMany(models.Attendee, { foreignKey: 'eventId' });
-      Event.belongsTo(models.Group, { foreignKey: 'groupId' });
-      Event.belongsTo(models.Venue, { foreignKey: 'venueId' });
-      Event.hasMany(models.eventsImage, { foreignKey: 'eventId', as: 'EventImages' });
+      Event.hasMany(models.Attendee, { foreignKey: 'eventId', onDelete: 'CASCADE' });
+      Event.hasMany(models.eventsImage, { foreignKey: 'eventId', as: 'EventImages', onDelete: 'CASCADE' });
+      Event.belongsTo(models.Group, { foreignKey: 'groupId', onDelete: 'CASCADE' });
+      Event.belongsTo(models.Venue, { foreignKey: 'venueId', onDelete: 'CASCADE' });
     }
   }
   Event.init({
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     venueId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     name: {
       type: DataTypes.STRING,
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     capacity: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     price: {
       type: DataTypes.FLOAT,

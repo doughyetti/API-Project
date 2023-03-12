@@ -1,0 +1,24 @@
+.groups-list-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.groups-list-header h1 {
+  display: inline-block;
+  align-items: center;
+  margin: auto 20px;
+}
+
+/* .groups-list-header h3 {
+
+} */
+
+.group-card {
+  cursor: pointer;
+}
+
+.group-card img {
+  width: 300px;
+}

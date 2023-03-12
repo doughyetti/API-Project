@@ -18,12 +18,14 @@ module.exports = {
       groupId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Groups' }
+        references: { model: 'Groups' },
+        onDelete: 'CASCADE'
       },
       venueId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Venues' }
+        allowNull: true,
+        references: { model: 'Venues' },
+        onDelete: 'CASCADE'
       },
       name: {
         type: Sequelize.STRING,
@@ -39,7 +41,7 @@ module.exports = {
       },
       capacity: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       price: {
         type: Sequelize.FLOAT,
