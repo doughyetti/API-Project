@@ -323,7 +323,7 @@ router.get('/:groupId/events', async (req, res) => {
 //POST event by group ID
 router.post('/:groupId/events', requireAuth, async (req, res) => {
   const { user } = req;
-  const { venueId, name, type, capacity, price, description, startDate, endDate } = req.body;
+  const { venueId, name, type, capacity, price, description, startDate, endDate, previewImage } = req.body;
   const groupId = Number(req.params.groupId);
   const group = await Group.findByPk(groupId);
 
@@ -331,7 +331,7 @@ router.post('/:groupId/events', requireAuth, async (req, res) => {
     const organizerId = group.organizerId;
     if (user.id === organizerId) {
       const newEvent = await Event.create({
-        groupId: groupId, venueId, name, type, capacity, price, description, startDate, endDate
+        groupId: groupId, venueId, name, type, capacity, price, description, startDate, endDate, previewImage
       });
 
       return res.json({
@@ -343,6 +343,7 @@ router.post('/:groupId/events', requireAuth, async (req, res) => {
         capacity: newEvent.capacity,
         price: newEvent.price,
         description: newEvent.description,
+        previewImage: newEvent.previewImage,
         startDate: formatDate(newEvent.startDate),
         endDate: formatDate(newEvent.endDate)
       });

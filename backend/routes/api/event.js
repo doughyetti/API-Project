@@ -53,12 +53,12 @@ router.get('/:eventId', async (req, res) => {
       id: eventId
     },
     attributes: {
-      exclude: ['createdAt', 'updatedAt', 'previewImage']
+      exclude: ['createdAt', 'updatedAt']
     },
     include: [
       {
         model: Group,
-        attributes: ['id', 'name', 'private', 'city', 'state']
+        // attributes: ['id', 'name', 'private', 'city', 'state']
       },
       {
         model: Venue,
@@ -71,6 +71,9 @@ router.get('/:eventId', async (req, res) => {
       }
     ]
   });
+
+  const user = await User.findByPk(event.Group.organizerId);
+  event.setDataValue(`Organizer`, user);
 
   if (event) {
     return res.json(event);

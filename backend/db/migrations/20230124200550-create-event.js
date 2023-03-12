@@ -23,7 +23,7 @@ module.exports = {
       },
       venueId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: { model: 'Venues' },
         onDelete: 'CASCADE'
       },
@@ -41,7 +41,7 @@ module.exports = {
       },
       capacity: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
       },
       price: {
         type: Sequelize.FLOAT,

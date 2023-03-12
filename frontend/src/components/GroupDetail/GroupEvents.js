@@ -3,6 +3,7 @@
 function GroupEventsComponent ({ events }) {
   const history = useHistory();
 
+  // eslint-disable-next-line
   let upcomingEvents = events.map(event => {
     let now = new Date();
     let eventDate = new Date(event?.startDate);
@@ -18,7 +19,7 @@ function GroupEventsComponent ({ events }) {
                 minute: '2-digit',
             })}</h5>
             <h2>{event.name}</h2>
-            <h4>{event.Venue.city}, {event.Venue.state}</h4>
+            <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
           </div>
 
           <div className='event-about'>
@@ -29,6 +30,7 @@ function GroupEventsComponent ({ events }) {
     }
   });
 
+  // eslint-disable-next-line
   let pastEvents = events.map(event => {
     let now = new Date();
     let eventDate = new Date(event?.startDate);
@@ -44,7 +46,7 @@ function GroupEventsComponent ({ events }) {
                 minute: '2-digit',
             })}</h5>
             <h2>{event.name}</h2>
-            <h4>{event.Venue.city}, {event.Venue.state}</h4>
+            <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
           </div>
 
           <div className='event-about'>
