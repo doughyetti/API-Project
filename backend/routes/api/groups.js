@@ -26,7 +26,13 @@ const formatDate = (date) => {
 
 //GET all groups
 router.get('/', async (req, res) => {
-  const Groups = await Group.findAll();
+  const Groups = await Group.findAll({
+      include: [
+        {
+          model: Event,
+        }
+      ]
+  });
 
   for await (let group of Groups) {
     const img = await groupsImage.findOne({
