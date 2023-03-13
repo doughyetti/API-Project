@@ -28,7 +28,7 @@ const NewEventForm = () => {
     const loadErrors = [];
 
     if (!name.length) loadErrors.push('Event name is required');
-    if (type !== 'In Person' || type !== 'Online') loadErrors.push('Group type is required');
+    if (!type) loadErrors.push('Group type is required');
     if (!privacy) loadErrors.push('Visibility Type is required');
     if (!price) loadErrors.push('Price is required');
     if (!startDate) loadErrors.push('Event start is required');
