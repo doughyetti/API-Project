@@ -1,0 +1,57 @@
+textarea {
+  width: 400px;
+  height: 200px;
+}
+
+input {
+  width: 400px;
+}
+
+#main-form-container {
+  width: 70%;
+  margin: 100px auto;
+}
+
+.form-header {
+  border-bottom: lightgray solid 3px;
+  padding-bottom: 20px;
+}
+
+.form-header h3 {
+  color: teal;
+  font-weight: 500;
+}
+
+.border-div {
+  border-bottom: lightgray solid 3px;
+  padding-bottom: 30px;
+}
+
+.sub-form-container h3 {
+  font-weight: 300;
+}
+
+.img-div {
+  margin-bottom: 20px;
+}
+
+ol {
+  position: relative;
+  left: -25px;
+}
+
+.errors {
+  color: red;
+}
+
+.newGroupSubmitButton {
+  background-color: rgb(207, 42, 39);
+  border: rgb(207, 42, 39) solid 1px;
+  box-shadow: 1px 2px 2px black;
+  color: white;
+  padding: 5px 8px 5px 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: .5rem 0 1rem 0;
+  cursor: pointer;
+}

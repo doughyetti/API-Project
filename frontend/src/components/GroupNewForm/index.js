@@ -1,23 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as groupActions from '../../store/groups';
+
+import './GroupNewForm.css';
 
 const NewGroupForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const [city, setCity] = useState('asd');
-  const [state, setState] = useState('as');
-  const [name, setName] = useState('asdasdasd');
-  const [about, setAbout] = useState('asdasdsadad');
-  const [type, setType] = useState('Online');
-  const [privacy, setPrivacy] = useState(false);
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [name, setName] = useState('');
+  const [about, setAbout] = useState('');
+  const [type, setType] = useState('');
+  const [privacy, setPrivacy] = useState();
   const [imgUrl, setImgUrl] = useState('');
   const [errors, setErrors] = useState([]);
+  const [submissionAttempt, setSubmissionAttempt] = useState(false);
+
+  useEffect(() => {
+    const loadErrors = [];
+    if (!city.length) loadErrors.push('City is required');
+    if (!state.length) loadErrors.push('State is required');
+    if (state.length > 2) loadErrors.push('Use state acronym');
+    if (!name.length) loadErrors.push('Group name is required');
+    if (about.length < 30) loadErrors.push('Description must be at least 30 characters long');
+    if (type !== 'In Person' || type !== 'Online') loadErrors.push('Group type is required');
+    if (!privacy) loadErrors.push('Visibility Type is required');
+    setErrors(loadErrors);
+  }, [city, state, name, about, type, privacy]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (errors.length) {
+      setSubmissionAttempt(true)
+    }
 
     const group = { city, state, name, about, type, private: privacy, previewImage: imgUrl }
 
@@ -32,40 +51,45 @@ const NewGroupForm = () => {
 
   return (
     <div id='main-form-container'>
+
       <div className='sub-form-container'>
-        <h3>BECOME AN ORGANIZER</h3>
-        <h1>We'll walk you through a few steps to build your local community</h1>
+
+        <div className='form-header'>
+          <h3>BECOME AN ORGANIZER</h3>
+          <h1>We'll walk you through a few steps to build your local community</h1>
+        </div>
 
         <form onSubmit={handleSubmit}>
-          <div>
-            <h1>First, set your group's location</h1>
+          {submissionAttempt && <ul className='errors'>
+              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          </ul>}
+
+          <div className='border-div'>
+            <h1>First, set your group's location.</h1>
             <h3>Meetup groups meet locally, in person and online. We'll connect you with people in your area, and more can join you online.</h3>
             <input
               type='text'
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              required
               placeholder='City' name='city'></input>
             <input
               type='text'
               value={state}
               onChange={(e) => setState(e.target.value)}
-              required
               placeholder='State' name='state'></input>
           </div>
 
-          <div>
+          <div className='border-div'>
             <h1>What will your group's name be?</h1>
             <h3>Choose a name that will give people a clear idea of what the group is about. Feel free to get creative! You can edit this later if you change your mind.</h3>
             <input
               type='text'
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
               placeholder='Group Name' name='name'></input>
           </div>
 
-          <div>
+          <div className='border-div'>
             <h1>Now describe what your group will be about</h1>
             <h3>People will see this when we promote your group, but you'll be able to add to it later, too.</h3>
             <ol>
@@ -77,7 +101,6 @@ const NewGroupForm = () => {
               type='text'
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              required
               placeholder='Please write at least 30 characters' name='about'></textarea>
           </div>
 
@@ -89,7 +112,6 @@ const NewGroupForm = () => {
                 name='meeting type'
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                required
               >
                 <option value=''>(select one)</option>
                 <option value='In Person'>In Person</option>
@@ -97,13 +119,12 @@ const NewGroupForm = () => {
               </select>
             </div>
 
-            <div>
+            <div className='border-div'>
               <h3>Is this group private or public?</h3>
               <select
                 name='privacy'
                 value={privacy}
                 onChange={(e) => setPrivacy(e.target.value)}
-                required
               >
                 <option value=''>(select one)</option>
                 <option value={true}>Private</option>
@@ -111,22 +132,18 @@ const NewGroupForm = () => {
               </select>
             </div>
 
-            <div>
-              <h3>Please add an image url for your group below:</h3>
-              <input
-                type='text'
-                value={imgUrl}
-                onChange={(e) => setImgUrl(e.target.value)}
-                required
-                placeholder='Image url' name='image url'></input>
-            </div>
           </div>
 
-          {errors && <ul className='errors'>
-              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>}
+          <div className='img-div'>
+            <h3>Please add an image url for your group below:</h3>
+            <input
+              type='text'
+              value={imgUrl}
+              onChange={(e) => setImgUrl(e.target.value)}
+              placeholder='Image url' name='image url'></input>
+          </div>
 
-          <button type='submit' className='submit-button'>
+          <button type='submit' className='newGroupSubmitButton'>
             Create New Group
           </button>
 
