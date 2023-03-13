@@ -27,7 +27,7 @@ module.exports = {
         unqiue: true
       },
       about: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       type: {
