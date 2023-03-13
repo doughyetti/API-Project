@@ -47,17 +47,17 @@ const NewEventForm = () => {
 
     if (errors.length) {
       setSubmissionAttempt(true)
-    }
+    } else {
+      const event = { groupId: currentGroup.id, name, type, description, price, startDate, endDate, previewImage: imgUrl }
 
-    const event = { groupId: currentGroup.id, name, type, description, price, startDate, endDate, previewImage: imgUrl }
-
-    return dispatch(eventActions.createNewEvent(currentGroup.id, event))
-      .then((res) => history.push(`/events/${res.id}`))
-      .catch(async (res) => {
+      return dispatch(eventActions.createNewEvent(currentGroup.id, event))
+        .then((res) => history.push(`/events/${res.id}`))
+        .catch(async (res) => {
           const data = await res.json();
 
           if (data && data.errors) setErrors(data.errors);
       })
+    }
   };
 
   return (

@@ -23,7 +23,7 @@ const GroupsPage = () => {
             <NavLink className='event-link' to='/events'>Events</NavLink>
             <h1>Groups</h1>
           </div>
-          
+
           <div className='groups-list-header-2'>
             <h4>Groups in Meetup</h4>
           </div>
@@ -42,7 +42,7 @@ const GroupsPage = () => {
                   <p>{about}</p>
 
                   <div className='group-card-events'>
-                    <h4>{Events.length} events</h4>
+                    {Events && <h4>{Events?.length} events</h4>}
                     <span>&#8226;</span>
                     {allGroups.private && <h4>Private</h4>}
                     {!allGroups.private && <h4>Public</h4>}

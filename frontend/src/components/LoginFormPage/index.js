@@ -16,6 +16,12 @@ function LoginFormPage() {
     <Redirect to="/" />
   );
 
+  const handleDemo = (e) =>{
+    e.preventDefault();
+    return dispatch(sessionActions.login({ credential:'Demo-lition', password:'password' }))
+  }
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -32,7 +38,7 @@ function LoginFormPage() {
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
-        <label>
+        <label className='headers'>
           Username or Email
           <input
             type="text"
@@ -41,7 +47,7 @@ function LoginFormPage() {
             required
           />
         </label>
-        <label>
+        <label className='headers'>
           Password
           <input
             type="password"
@@ -51,6 +57,7 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button type='submit' onClick={handleDemo}>Demo User</button>
       </form>
     </div>
   );

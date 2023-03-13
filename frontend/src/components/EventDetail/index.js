@@ -100,7 +100,7 @@ const EventDetail = () => {
               <h4>{event.type}</h4>
             </div>
 
-            {sessionUser?.user?.id === event?.Organizer?.id &&
+            {sessionUser?.id === event?.Organizer?.id &&
             <button className='delete-button' onClick={handleDelete}>Delete</button>}
           </div>
         </div>

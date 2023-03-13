@@ -66,3 +66,12 @@
 .sessionUL {
   list-style: none;
 }
+
+.user-button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-button {
+  margin: auto;
+}

@@ -9,7 +9,7 @@ const HomePage = () => {
   const sessionUser = useSelector(state => state.session?.user);
 
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-  
+
   let startGroupIdName = !userLoggedIn ? "start-group-disabled" : "start-group";
   let joinButton = !userLoggedIn ? "signup-button" : "signup-button-hidden";
 
@@ -59,7 +59,7 @@ const HomePage = () => {
 
         <div id={startGroupIdName}>
           <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1678644571/meetup%20shit/joinGroup_ufqm4a.svg' alt='create-group-icon' />
-          <NavLink className ='grid-item-3-navlinks' to='/events'>Start a group</NavLink>
+          <NavLink className ='grid-item-3-navlinks' to='/groups/new'>Start a group</NavLink>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
         </div>
       </div>

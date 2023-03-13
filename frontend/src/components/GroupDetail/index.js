@@ -18,9 +18,9 @@ const GroupDetail = () => {
 
   const [loaded, setLoaded] = useState(false);
   const [userIsOrganizer, setUserIsOrganizer] = useState(false);
-
+  
   useEffect(() => {
-    sessionUser?.user?.id === group?.Organizer?.id ? setUserIsOrganizer(true) : setUserIsOrganizer(false)
+    sessionUser?.id === group?.Organizer?.id ? setUserIsOrganizer(true) : setUserIsOrganizer(false)
   }, [sessionUser, group]);
 
   useEffect(() => {

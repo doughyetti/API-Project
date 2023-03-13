@@ -36,18 +36,18 @@ const NewGroupForm = () => {
 
     if (errors.length) {
       setSubmissionAttempt(true)
-    }
+    } else {
+      const group = { city, state, name, about, type, private: privacy, previewImage: imgUrl }
 
-    const group = { city, state, name, about, type, private: privacy, previewImage: imgUrl }
-
-    return dispatch(groupActions.createNewGroup(group))
-      .then((res) => history.push(`/groups/${res.id}`))
-      .catch(async (res) => {
+      return dispatch(groupActions.createNewGroup(group))
+        .then((res) => history.push(`/groups/${res.id}`))
+        .catch(async (res) => {
         const data = await res.json();
 
         if (data && data.errors) setErrors(data.errors);
       })
-  }
+    }
+  };
 
   return (
     <div id='main-form-container'>
