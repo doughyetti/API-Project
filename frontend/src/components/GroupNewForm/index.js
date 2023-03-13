@@ -26,7 +26,7 @@ const NewGroupForm = () => {
     if (state.length > 2) loadErrors.push('Use state acronym');
     if (!name.length) loadErrors.push('Group name is required');
     if (about.length < 30) loadErrors.push('Description must be at least 30 characters long');
-    if (type !== 'In Person' || type !== 'Online') loadErrors.push('Group type is required');
+    if (!type) loadErrors.push('Group type is required');
     if (!privacy) loadErrors.push('Visibility Type is required');
     setErrors(loadErrors);
   }, [city, state, name, about, type, privacy]);
