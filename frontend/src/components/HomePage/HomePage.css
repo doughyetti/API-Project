@@ -2,8 +2,18 @@
   display: grid;
   height: 70vh;
   max-width: 75vw;
-  margin: 40px auto auto auto;
+  margin: 70px auto auto auto;
   grid-template-rows: 3fr 1fr 3fr 1fr;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .grid-item-1 {
@@ -70,12 +80,27 @@
 .grid-item-3-navlinks {
   text-decoration: none;
   margin: 10px 0px 0px 0px;
-  color: black;
+  color: teal;
   font-weight: bold;
 }
 
 .grid-item-3-navlinks:hover {
   text-decoration: underline;
+}
+
+#start-group-disabled {
+  color: darkgray;
+}
+
+#start-group-disabled img {
+  color: darkgray;
+}
+
+#start-group-disabled .grid-item-3-navlinks {
+  color: darkgray;
+  cursor: default;
+  text-decoration: none;
+  pointer-events: none;
 }
 
 .button-section {
@@ -99,4 +124,8 @@
   border-radius: 5px;
   font-weight: 500;
   cursor: pointer;
+}
+
+.signup-button-hidden {
+  visibility: hidden;
 }

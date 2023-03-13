@@ -8,6 +8,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   let sessionLinks;
+
   if (sessionUser) {
     sessionLinks = (
       <li>
@@ -16,20 +17,32 @@ function Navigation({ isLoaded }) {
     );
   } else {
     sessionLinks = (
-      <li>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </li>
+      <ul className='sessionUL'>
+        <li>
+          <NavLink className='log-links' to="/login">Log In</NavLink>
+          <NavLink className='log-links' to="/signup">Sign Up</NavLink>
+        </li>
+      </ul>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      {isLoaded && sessionLinks}
-    </ul>
+    <div className='mainavDiv'>
+      <ul className='navUl'>
+          <li className='homeButtonLi'>
+              <NavLink className='homeButton' exact to='/'>Meetup</NavLink>
+          </li >
+          <li className='navLi'>
+              {isLoaded && sessionLinks}
+          </li>
+      </ul>
+    </div>
+    // <ul>
+    //   <li>
+    //     <NavLink exact to="/">Home</NavLink>
+    //   </li>
+    //   {isLoaded && sessionLinks}
+    // </ul>
   );
 }
 

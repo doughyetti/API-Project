@@ -1,9 +1,25 @@
+import { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './HomePage.css';
 
 const HomePage = () => {
   const history = useHistory();
+  const sessionUser = useSelector(state => state.session?.user);
+
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  
+  let startGroupIdName = !userLoggedIn ? "start-group-disabled" : "start-group";
+  let joinButton = !userLoggedIn ? "signup-button" : "signup-button-hidden";
+
+  useEffect(() => {
+    if (sessionUser) {
+        setUserLoggedIn(true)
+    } else {
+        setUserLoggedIn(false)
+    }
+  }, [sessionUser])
 
   const handleSignup = () => {
     history.push(`/signup`);
@@ -41,7 +57,7 @@ const HomePage = () => {
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
         </div>
 
-        <div>
+        <div id={startGroupIdName}>
           <img src='https://res.cloudinary.com/dcbexnl8j/image/upload/v1678644571/meetup%20shit/joinGroup_ufqm4a.svg' alt='create-group-icon' />
           <NavLink className ='grid-item-3-navlinks' to='/events'>Start a group</NavLink>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
@@ -49,7 +65,7 @@ const HomePage = () => {
       </div>
 
       <div className='button-section'>
-        <button className='signup-button' onClick={handleSignup}>Join Meetup</button>
+        <button className={joinButton} onClick={handleSignup}>Join Meetup</button>
       </div>
     </div>
   )
