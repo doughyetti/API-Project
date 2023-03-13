@@ -1,5 +1,7 @@
  import { useHistory } from 'react-router-dom';
 
+ import '../EventsPage/EventsPage.css';
+
 function GroupEventsComponent ({ events }) {
   const history = useHistory();
 
@@ -10,16 +12,21 @@ function GroupEventsComponent ({ events }) {
 
     if (eventDate > now) {
       return (
-        <div key={event.id} className='event-container' onClick={() => history.push(`/events/${event.id}`)}>
-          <img src={event.previewImage} alt='event' />
+        <div key={event.id} className='event-card-2' onClick={() => history.push(`/events/${event.id}`)}>
 
-          <div className='event-details'>
-            <h5 className='event-date-time'>{eventDate.toLocaleDateString()} {eventDate.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-            })}</h5>
-            <h2>{event.name}</h2>
-            <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
+          <div className='event-card-container'>
+            <div className='event-card-image'>
+              <img src={event.previewImage} alt='event' />
+            </div>
+
+            <div className='event-details'>
+              <h4 className='event-date-time'>{eventDate.toLocaleDateString()} &#8226; {eventDate.toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+              })}</h4>
+              <h2>{event.name}</h2>
+              <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
+            </div>
           </div>
 
           <div className='event-about'>
@@ -37,16 +44,21 @@ function GroupEventsComponent ({ events }) {
 
     if (eventDate < now) {
       return (
-        <div key={event.id} className='event-container' onClick={() => history.push(`/events/${event.id}`)}>
-          <img src={event.previewImage} alt='event' />
+        <div key={event.id} className='event-card-2' onClick={() => history.push(`/events/${event.id}`)}>
 
-          <div className='event-details'>
-            <h5 className='event-date-time'>{eventDate.toLocaleDateString()} {eventDate.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-            })}</h5>
-            <h2>{event.name}</h2>
-            <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
+          <div className='event-card-container'>
+            <div className='event-card-image'>
+              <img src={event.previewImage} alt='event' />
+            </div>
+
+            <div className='event-details'>
+              <h4 className='event-date-time'>{eventDate.toLocaleDateString()} &#8226; {eventDate.toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+              })}</h4>
+              <h2>{event.name}</h2>
+              <h4>{event.Venue?.city}, {event.Venue?.state}</h4>
+            </div>
           </div>
 
           <div className='event-about'>

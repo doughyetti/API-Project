@@ -13,7 +13,7 @@ module.exports = {
       {
         organizerId: 1,
         name: 'Evening Tennis on the Water',
-        about: 'Enjoy rounds of tennis with a tight-nit group of people on the water facing the Brooklyn Bridge. Singles or doubles.',
+        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
         type: 'In Person',
         private: true,
         city: 'New York',
@@ -24,7 +24,7 @@ module.exports = {
       {
         organizerId: 2,
         name: 'Ball w the boisss',
-        about: 'Enjoy rounds of bball with a tight-nit group of people on the water facing the Brooklyn Bridge. 1v1s and 5v5s.',
+        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
         type: 'In Person',
         private: true,
         city: 'New York',
@@ -35,7 +35,7 @@ module.exports = {
       {
         organizerId: 3,
         name: 'Climbing w the crew',
-        about: 'Enjoy bouldering with a tight-nit group of people on the water facing the Brooklyn Bridge. dynos only brah.',
+        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
         type: 'In Person',
         private: true,
         city: 'New York',

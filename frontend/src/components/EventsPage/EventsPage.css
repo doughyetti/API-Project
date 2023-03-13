@@ -63,6 +63,15 @@ h4 {
   /* align-items: flex-start; */
 }
 
+.event-card-2 {
+  cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: inline-block;
+  /* flex-direction: row; */
+  /* align-items: flex-start; */
+}
+
 .event-card-container {
   display: flex;
   flex-direction: row;
