@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
       <ul className='sessionUL'>
         <li>
           <NavLink className='log-links' to="/login">Log In</NavLink>
-          <NavLink className='log-links' to="/signup">Sign Up</NavLink>
+          <NavLink id="sign-up-nav" className='log-links' to="/signup">Sign Up</NavLink>
         </li>
       </ul>
     );
