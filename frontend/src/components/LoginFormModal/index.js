@@ -29,12 +29,16 @@ function LoginFormModal() {
 
   return (
     <div className='form-container'>
+      <div className="login-header">
+        
+      </div>
+
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label className='headers'>
-          Username or Email
+          Email
           <input
             type="text"
             value={credential}
