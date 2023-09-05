@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import OpenModalButton from "../OpenModalButton";
+import LoginModalBtn from "./LoginModalBtn";
+import SignupModalBtn from "./SignupModalBtn";
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -22,11 +23,11 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <ul className='sessionUL'>
         <li>
-          <OpenModalButton
+          <LoginModalBtn
             buttonText="Log In"
             modalComponent={<LoginFormModal />}
           />
-          <OpenModalButton
+          <SignupModalBtn
             buttonText="Sign Up"
             modalComponent={<SignupFormModal />}
           />
