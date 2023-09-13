@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
+import SignupFormModal from "../SignupFormModal";
+import SignupModalBtn from "../Navigation/SignupModalBtn";
 import './LoginForm.css';
 
 function LoginFormModal() {
@@ -31,9 +33,14 @@ function LoginFormModal() {
     <div className='form-container'>
       <div className="form-sub-container">
         <div className="login-header">
-          <img className="login-icon" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" />
+          <img className="login-icon" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
           <h1>Log in</h1>
-          <p>Not a member yet?</p>
+          <span>Not a member yet?
+            <SignupModalBtn
+              buttonText="Sign up"
+              modalComponent={<SignupFormModal />}
+            />
+          </span>
         </div>
 
         <form onSubmit={handleSubmit}>

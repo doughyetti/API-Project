@@ -15,7 +15,7 @@ function SignupModalBtn({
     setModalContent(modalComponent);
   };
 
-  return <button className="sign-up-btn" onClick={onClick}>{buttonText}</button>;
+  return <button className="sign-up-btn sign-up-ref" onClick={onClick}>{buttonText}</button>;
 };
 
 export default SignupModalBtn;

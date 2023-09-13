@@ -25,6 +25,11 @@
   margin-bottom: 25px;
 }
 
+.login-icon {
+  width: 2.5vw;
+  height: 4vh;
+}
+
 .login-header > * {
   margin: 10px auto;
   padding: 0;
@@ -35,9 +40,18 @@
   font-weight: 700;
 }
 
-.login-icon {
-  width: 2.5vw;
-  height: 4vh;
+.sign-up-ref {
+  background: none;
+  border: none;
+  color: rgb(0, 130, 148);
+  padding: 0 5px;
+  font-size: 1rem;
+}
+
+.sign-up-ref:hover {
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .login-labels {
