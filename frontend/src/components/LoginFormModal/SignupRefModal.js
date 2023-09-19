@@ -1,7 +1,7 @@
 import React from "react";
 import { useModal } from "../../context/Modal";
 
-function SignupModalBtn({
+function SignupModalRef({
   modalComponent,
   buttonText,
   onButtonClick,
@@ -15,7 +15,7 @@ function SignupModalBtn({
     setModalContent(modalComponent);
   };
 
-  return <button className="sign-up-btn" onClick={onClick}>{buttonText}</button>;
+  return <button className="sign-up-ref" onClick={onClick}>{buttonText}</button>;
 };
 
-export default SignupModalBtn;
+export default SignupModalRef;

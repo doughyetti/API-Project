@@ -3,7 +3,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
 import SignupFormModal from "../SignupFormModal";
-import SignupModalBtn from "../Navigation/SignupModalBtn";
+import SignupModalRef from "./SignupRefModal";
 import './LoginForm.css';
 
 function LoginFormModal() {
@@ -36,7 +36,7 @@ function LoginFormModal() {
           <img className="login-icon" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
           <h1>Log in</h1>
           <span>Not a member yet?
-            <SignupModalBtn
+            <SignupModalRef
               buttonText="Sign up"
               modalComponent={<SignupFormModal />}
             />
