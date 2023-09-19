@@ -1,0 +1,49 @@
+.signup-form-container {
+  width: 20vw;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-form-sub-container {
+  width: 15vw;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-header {
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.signup-header > * {
+  margin: 10px auto;
+  padding: 0;
+}
+
+.signup-header>h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.log-in-ref {
+  background: none;
+  border: none;
+  color: rgb(0, 130, 148);
+  padding: 0 5px;
+  font-size: 1rem;
+}
+
+.log-in-ref:hover {
+  cursor: pointer;
+  background: none;
+  border: none;
+}

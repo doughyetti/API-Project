@@ -33,7 +33,7 @@ function LoginFormModal() {
     <div className='form-container'>
       <div className="form-sub-container">
         <div className="login-header">
-          <img className="login-icon" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
+          <img className="meet-icon" alt="meetup" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
           <h1>Log in</h1>
           <span>Not a member yet?
             <SignupModalRef
