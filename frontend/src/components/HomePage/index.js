@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import SignupFormModal from "../SignupFormModal";
+import SignupModalHome from "./SignupModalHome";
 
 import './HomePage.css';
 
@@ -65,7 +67,10 @@ const HomePage = () => {
       </div>
 
       <div className='button-section'>
-        <button className={joinButton} onClick={handleSignup}>Join Meetup</button>
+        <SignupModalHome
+          buttonText="Sign Up"
+          modalComponent={<SignupFormModal />}
+        />
       </div>
     </div>
   )
