@@ -26,6 +26,7 @@
 .group-info {
   display: flex;
   flex-direction: row;
+  height: 565px;
 }
 
 .group-main-text {
@@ -35,8 +36,8 @@
 
 .group-info-buttons {
   position: relative;
-  top: 565px;
-  left: -320px;
+  height: 20px;
+  top: 325px;
 }
 
 .group-sub-details {

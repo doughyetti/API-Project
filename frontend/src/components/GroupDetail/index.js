@@ -18,7 +18,7 @@ const GroupDetail = () => {
 
   const [loaded, setLoaded] = useState(false);
   const [userIsOrganizer, setUserIsOrganizer] = useState(false);
-  
+
   useEffect(() => {
     sessionUser?.id === group?.Organizer?.id ? setUserIsOrganizer(true) : setUserIsOrganizer(false)
   }, [sessionUser, group]);
@@ -67,14 +67,14 @@ const GroupDetail = () => {
             <h4>{group?.city}, {group?.state}</h4>
             <h4>{events.length} events &#8226; {group?.private ? "Private" : "Public"}</h4>
             <h4>Organized by {group?.Organizer?.firstName} {group?.Organizer?.lastName}</h4>
-          </div>
 
-          {userIsOrganizer &&
+            {userIsOrganizer &&
             <div className='group-info-buttons'>
               <button onClick={handleCreateEvent}>Create event</button>
               <button onClick={handleDelete}>Delete</button>
               <button onClick={handleUpdate}>Update</button>
             </div>}
+          </div>
         </div>
       </div>
 
