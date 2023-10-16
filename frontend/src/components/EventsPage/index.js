@@ -18,13 +18,15 @@ const EventsPage = () => {
   return (
     <>
       <div className='events-list-card'>
-        <div className='events-list-header'>
-          <h1>Events</h1>
-          <NavLink className='group-link' to='/groups'>Groups</NavLink>
-        </div>
+        <div className="events-headers">
+          <div className='events-list-header'>
+            <h1>Events</h1>
+            <NavLink className='group-link' to='/groups'>Groups</NavLink>
+          </div>
 
-        <div className='events-list-header-2'>
-          <h4>Events in Meetup</h4>
+          <div className='events-list-header-2'>
+            <h4>Events in Meetup</h4>
+          </div>
         </div>
 
         <div className='main-event-container'>

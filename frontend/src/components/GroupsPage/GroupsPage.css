@@ -11,21 +11,28 @@ h4 {
 .groups-list-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: center;
   width: 70%;
-  position: absolute;
+  position: relative;
   top: 150px;
+  margin: 0 auto;
 }
 
-.groups-list-header {
+.groups-headers {
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* .groups-list-header {
   position: relative;
   right: 70px;
-}
+} */
 
 .event-link {
   display: inline-block;
   align-items: center;
-  margin: auto 20px;
+  margin-right: 20px;
   font-size: 24pt;
   font-weight: bold;
   text-decoration: none;
@@ -34,7 +41,7 @@ h4 {
 
 .groups-list-header h1 {
   display: inline-block;
-  align-items: center;
+  /* align-items: center; */
   margin: auto 20px;
   font-size: 24pt;
   font-weight: bold;
@@ -42,15 +49,16 @@ h4 {
   color: teal;
 }
 
-.groups-list-header-2 {
+/* .groups-list-header-2 {
   position: relative;
   right: 117px;
-}
+} */
 
 .main-group-container {
-  width: 50%;
-  position: relative;
-  left: 255px;
+  width: 70%;
+  /* position: relative; */
+  margin: 0 auto;
+  /* left: 255px; */
 }
 
 .group-card {

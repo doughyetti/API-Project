@@ -19,6 +19,7 @@ const GroupsPage = () => {
   return (
     <>
       <div className='groups-list-card'>
+        <div className="groups-headers">
           <div className='groups-list-header'>
             <NavLink className='event-link' to='/events'>Events</NavLink>
             <h1>Groups</h1>
@@ -27,6 +28,7 @@ const GroupsPage = () => {
           <div className='groups-list-header-2'>
             <h4>Groups in Meetup</h4>
           </div>
+        </div>
 
         <div className='main-group-container'>
           {allGroups.map(({ id, previewImage, name, city, state, about, Events }) => (
