@@ -35,51 +35,57 @@ function LoginFormModal() {
   }
 
   return (
-    <div className='form-container'>
-      <div className="form-sub-container">
-        <div className="login-header">
-          <img className="meet-icon" alt="meetup" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
-          <h1>Log in</h1>
-          <span>Not a member yet?
-            <SignupModalRef
-              buttonText="Sign up"
-              modalComponent={<SignupFormModal />}
-            />
-          </span>
-        </div>
+    <>
+      <button className="close-modal-btn" onClick={closeModal}>
+        <img src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1698185477/meetup%20shit/close-outline_enstbt.svg" alt="close-btn"></img>
+      </button>
 
-        <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
-          <label className='login-labels'>
-            Email
-            <input className="login-inputs"
-              type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            Password
-            <input className="login-inputs"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-
-          <div className="login-btns-container">
-            <button className="login-btns" type="submit">Log In</button>
-            <button className="login-btns" type='submit' onClick={handleDemo}>Demo User</button>
+      <div className='form-container'>
+        <div className="form-sub-container">
+          <div className="login-header">
+            <img className="meet-icon" alt="meetup" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
+            <h1>Log in</h1>
+            <span>Not a member yet?
+              <SignupModalRef
+                buttonText="Sign up"
+                modalComponent={<SignupFormModal />}
+              />
+            </span>
           </div>
 
-        </form>
+          <form onSubmit={handleSubmit}>
+            <ul>
+              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <label className='login-labels'>
+              Email
+              <input className="login-inputs"
+                type="text"
+                value={credential}
+                onChange={(e) => setCredential(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              Password
+              <input className="login-inputs"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
 
+            <div className="login-btns-container">
+              <button className="login-btns" type="submit">Log In</button>
+              <button className="login-btns" type='submit' onClick={handleDemo}>Demo User</button>
+            </div>
+
+          </form>
+
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

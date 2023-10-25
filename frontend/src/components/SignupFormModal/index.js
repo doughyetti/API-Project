@@ -32,84 +32,89 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="signup-form-container">
-      <div className="signup-form-sub-container">
-        <div className="signup-header">
-          <img className="meet-icon" alt="meetup" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
-          <h1>Sign up</h1>
-          <span>Already a member?
-            <LoginModalRef
-              buttonText="Sign in"
-              modalComponent={<LoginFormModal />}
-            />
-          </span>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
-          <label className='login-labels'>
-            Email
-            <input className="login-inputs"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            Username
-            <input className="login-inputs"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            First Name
-            <input className="login-inputs"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            Last Name
-            <input className="login-inputs"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            Password
-            <input className="login-inputs"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          <label className='login-labels'>
-            Confirm Password
-            <input className="login-inputs"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </label>
-
-          <div className="login-btns-container">
-            <button className="login-btns" type="submit">Sign Up</button>
+    <>
+      <button className="close-modal-btn" onClick={closeModal}>
+        <img src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1698185477/meetup%20shit/close-outline_enstbt.svg" alt="close-btn"></img>
+      </button>
+      <div className="signup-form-container">
+        <div className="signup-form-sub-container">
+          <div className="signup-header">
+            <img className="meet-icon" alt="meetup" src="https://res.cloudinary.com/dcbexnl8j/image/upload/v1693948323/meetup%20shit/meetup-icon_n56qwx.png" alt="login" />
+            <h1>Sign up</h1>
+            <span>Already a member?
+              <LoginModalRef
+                buttonText="Sign in"
+                modalComponent={<LoginFormModal />}
+              />
+            </span>
           </div>
-        </form>
+
+          <form onSubmit={handleSubmit}>
+            <ul>
+              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <label className='login-labels'>
+              Email
+              <input className="login-inputs"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              Username
+              <input className="login-inputs"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              First Name
+              <input className="login-inputs"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              Last Name
+              <input className="login-inputs"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              Password
+              <input className="login-inputs"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+            <label className='login-labels'>
+              Confirm Password
+              <input className="login-inputs"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </label>
+
+            <div className="login-btns-container">
+              <button className="login-btns" type="submit">Sign Up</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
