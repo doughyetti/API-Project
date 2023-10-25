@@ -62,9 +62,9 @@ const NewEventForm = () => {
 
   return (
     <div className='main-new-event-container'>
-      <h1>Create an event for {currentGroup.name}</h1>
+      <h1 className="new-form-header">Create an event for {currentGroup.name}</h1>
 
-      <div className='form-container'>
+      <div className='event-form-container'>
         <form className='new-event-form' onSubmit={handleSubmit}>
 
         {submissionAttempt && <ul className='errors'>
