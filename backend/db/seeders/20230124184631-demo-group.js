@@ -13,7 +13,7 @@ module.exports = {
       {
         organizerId: 1,
         name: 'Evening Tennis on the Water',
-        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        about: "Playing tennis with friends can be a fun and enjoyable way to spend time together while staying active. Whether you're playing singles or doubles, tennis with friends offers a perfect blend of physical activity, social interaction, and enjoyment, making it a popular choice for leisure and recreation.",
         type: 'In Person',
         private: true,
         city: 'New York',
@@ -24,7 +24,7 @@ module.exports = {
       {
         organizerId: 2,
         name: 'Ball w the boisss',
-        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        about: "Playing basketball with friends is a fantastic way to have fun, stay active, and enjoy the spirit of friendly competition. Whether you're playing a pickup game at a local park, shooting hoops in your driveway, or participating in a more organized league, playing basketball with friends offers a myriad of physical, social, and emotional benefits, making it a popular and enjoyable activity for people of all ages.",
         type: 'In Person',
         private: true,
         city: 'New York',
@@ -35,7 +35,7 @@ module.exports = {
       {
         organizerId: 3,
         name: 'Climbing w the crew',
-        about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        about: "Rock climbing with friends is an exhilarating and social activity that offers a unique blend of physical challenge, mental focus, and camaraderie. Whether climbing outdoors on natural rock formations or indoors at a climbing gym, rock climbing with friends offers a unique opportunity for personal growth, physical fitness, and building strong social connections.",
         type: 'In Person',
         private: true,
         city: 'New York',

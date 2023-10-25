@@ -35,6 +35,10 @@
   align-items: center;
 }
 
+.event-detail-group-crumb:hover {
+  cursor: pointer;
+}
+
 .group-crumb {
   display: flex;
   flex-direction: column;
